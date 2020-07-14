@@ -1,4 +1,5 @@
 import React from 'react';
+import background from '../assets/background.jpg';
 
 import {
   SafeAreaView,
@@ -6,9 +7,11 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 
 const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 export default WrappedComponent => {
   return props => {
@@ -29,7 +32,9 @@ export default WrappedComponent => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: '#1198ce',
+    flex: 1,
     minHeight: windowHeight,
+    width: windowWidth,
+    backgroundColor: '#425583',
   },
 });

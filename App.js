@@ -7,17 +7,15 @@
  */
 
 import React from 'react';
-import {View, Text} from 'react-native';
-import SafeView from './hocs/SafeView';
+import {NavigationContainer} from '@react-navigation/native';
+import Routes from './routes';
 
 const App = () => {
   return (
-    <>
-      <View>
-        <Text>WELCOME TO OVERWATCH</Text>
-      </View>
-    </>
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
   );
 };
 
-export default SafeView(App);
+export default App;
