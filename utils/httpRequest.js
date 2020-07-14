@@ -2,7 +2,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default ({method, url, data}) => {
-  const fullUrl = 'http://10.0.2.2/api' + url;
+  const fullUrl = 'http://10.0.2.2:3050/api' + url;
   const authToken = AsyncStorage.getItem('token');
 
   return new Promise((resolve, reject) => {
@@ -15,10 +15,10 @@ export default ({method, url, data}) => {
       url: fullUrl,
     })
       .then(res => {
-        resolve(res);
+        resolve(res.data);
       })
       .catch(err => {
-        console.log(err);
+        console.warn(err);
         reject(err);
       });
   });
