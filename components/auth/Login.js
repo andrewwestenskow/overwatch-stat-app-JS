@@ -13,8 +13,8 @@ const Login = ({navigation}) => {
 
   const handleLogin = () => {
     httpRequest({method: 'POST', data: {email, password}, url: '/auth/login'})
-      .then(res => {
-        AsyncStorage.setItem('token', res.token);
+      .then(async res => {
+        await AsyncStorage.setItem('token', res.token);
         navigation.navigate('Dashboard');
       })
       .catch(err => console.log('ERROR'));
