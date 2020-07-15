@@ -14,4 +14,21 @@ export default StyleSheet.create({
     width: windowWidth,
     backgroundColor: '#425583',
   },
+  window: {
+    flex: 1,
+    padding: 50,
+    minHeight: windowHeight,
+    width: windowWidth,
+    backgroundColor: '#425583',
+  },
+  flex: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  listItem: {
+    padding: 15,
+    borderColor: '#000',
+    borderWidth: 1,
+    justifyContent: 'space-between',
+  },
 });
