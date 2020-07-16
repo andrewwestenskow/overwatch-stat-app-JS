@@ -24,7 +24,6 @@ const Dashboard = props => {
 
   const selectPlayer = id => {
     httpRequest({method: 'GET', url: `/players/${id}`}).then(([res]) => {
-      console.log(res);
       props.navigation.navigate('Results', {player: res});
     });
   };

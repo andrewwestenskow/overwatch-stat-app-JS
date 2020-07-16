@@ -5,8 +5,12 @@ import styles from '../../styles';
 import httpRequest from '../../utils/httpRequest';
 import UI from '../UI';
 
-const Results = ({route: {params: player}, navigation}) => {
-  console.log(player);
+const Results = ({
+  route: {
+    params: {player},
+  },
+  navigation,
+}) => {
   return (
     <View style={styles.containers.window}>
       <Text style={styles.typography.heading}>Results</Text>

@@ -32,4 +32,10 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 10,
   },
+  listContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    // flexDirection: 'row',
+    padding: 0,
+  },
 });
