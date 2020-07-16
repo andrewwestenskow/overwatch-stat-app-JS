@@ -1,5 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+const base = {
+  fontFamily: 'BigNoodleTooOblique',
+};
 
 const Button = props => {
   return (
@@ -23,5 +26,5 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#dd5f19',
   },
-  text: {textAlign: 'center'},
+  text: {textAlign: 'center', ...base},
 });

@@ -35,7 +35,7 @@ export default StyleSheet.create({
   listContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-    // flexDirection: 'row',
+    flexDirection: 'row',
     padding: 0,
   },
 });

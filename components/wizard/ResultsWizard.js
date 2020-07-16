@@ -22,7 +22,7 @@ const ResultsWizard = props => {
       <Text style={styles.typography.heading}>Record New Match</Text>
       <View style={styles.containers.listContainer}>
         {availableMaps.map(map => (
-          <MapImage key={map.id} src={map.image} />
+          <MapImage key={map.id} src={map.image} name={map.name} id={map.id} />
         ))}
       </View>
     </View>
