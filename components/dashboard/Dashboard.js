@@ -22,12 +22,20 @@ const Dashboard = props => {
     getPlayers();
   }, []);
 
+  const selectPlayer = id => {
+    httpRequest({method: 'GET', url: `/players/${id}`}).then(([res]) => {
+      console.log(res);
+      props.navigation.navigate('Results', {player: res});
+    });
+  };
+
   return (
     <View style={containers.window}>
       <Text style={typography.heading}>DASHBOARD</Text>
       {players.map(player => {
         return (
           <TouchableOpacity
+            onPress={() => selectPlayer(player.id)}
             style={{...containers.flex, ...containers.listItem}}
             key={player.id}>
             <Text>{player.platform}</Text>
