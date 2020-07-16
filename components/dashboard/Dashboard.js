@@ -11,11 +11,15 @@ const Dashboard = props => {
   const [players, setPlayers] = useState([]);
   const [isAddingPlayer, setIsAddingPlayer] = useState(false);
 
-  useEffect(() => {
+  const getPlayers = () => {
     httpRequest({method: 'GET', url: '/players'}).then(res => {
-      console.log(res);
       setPlayers(res);
+      isAddingPlayer && setIsAddingPlayer(false);
     });
+  };
+
+  useEffect(() => {
+    getPlayers();
   }, []);
 
   return (
@@ -31,7 +35,7 @@ const Dashboard = props => {
           </TouchableOpacity>
         );
       })}
-      {isAddingPlayer && <AddPlayerForm />}
+      {isAddingPlayer && <AddPlayerForm getPlayers={getPlayers} />}
       <UI.Button
         onPress={() => setIsAddingPlayer(prev => !prev)}
         title={`${isAddingPlayer ? 'Cancel' : 'Add New Player...'}`}

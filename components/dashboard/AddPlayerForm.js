@@ -15,9 +15,25 @@ const AddPlayerForm = props => {
     });
   }, []);
 
+  const savePlayer = () => {
+    console.log('HIT');
+    if (!name || !platform) {
+      console.log('Missing value: ', name, platform);
+      return;
+    } else {
+      httpRequest({
+        method: 'POST',
+        url: '/players',
+        data: {name, platform_id: platform},
+      }).then(() => {
+        props.getPlayers();
+      });
+    }
+  };
+
   return (
     <UI.FormWrapper>
-      <UI.Input onTextChange={text => setName(text)} placeholder="Gamertag" />
+      <UI.Input onChange={text => setName(text)} placeholder="Gamertag" />
       <UI.Select
         selectedValue={platform}
         onValueChange={value => setPlatform(value)}>
@@ -26,7 +42,7 @@ const AddPlayerForm = props => {
           <UI.Option label={option.name} value={option.id} key={option.id} />
         ))}
       </UI.Select>
-      <UI.Button title="Save" />
+      <UI.Button onPress={savePlayer} title="Save" />
     </UI.FormWrapper>
   );
 };

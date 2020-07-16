@@ -30,5 +30,6 @@ export default StyleSheet.create({
     borderColor: '#000',
     borderWidth: 1,
     justifyContent: 'space-between',
+    marginBottom: 10,
   },
 });

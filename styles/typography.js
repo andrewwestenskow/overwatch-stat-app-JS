@@ -5,5 +5,6 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
 });

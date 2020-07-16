@@ -1,7 +1,9 @@
 import React from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 
-export default props => <TextInput style={style.input} {...props} />;
+export default props => (
+  <TextInput style={style.input} onChangeText={props.onChange} {...props} />
+);
 
 const style = StyleSheet.create({
   input: {
