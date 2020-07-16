@@ -4,9 +4,12 @@ import SafeView from '../../hocs/SafeView';
 import containers from '../../styles/container';
 import typography from '../../styles/typography';
 import httpRequest from '../../utils/httpRequest';
+import UI from '../UI';
+import AddPlayerForm from './AddPlayerForm';
 
 const Dashboard = props => {
   const [players, setPlayers] = useState([]);
+  const [isAddingPlayer, setIsAddingPlayer] = useState(false);
 
   useEffect(() => {
     httpRequest({method: 'GET', url: '/players'}).then(res => {
@@ -14,6 +17,7 @@ const Dashboard = props => {
       setPlayers(res);
     });
   }, []);
+
   return (
     <View style={containers.window}>
       <Text style={typography.heading}>DASHBOARD</Text>
@@ -27,6 +31,11 @@ const Dashboard = props => {
           </TouchableOpacity>
         );
       })}
+      {isAddingPlayer && <AddPlayerForm />}
+      <UI.Button
+        onPress={() => setIsAddingPlayer(prev => !prev)}
+        title={`${isAddingPlayer ? 'Cancel' : 'Add New Player...'}`}
+      />
     </View>
   );
 };

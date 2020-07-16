@@ -9,12 +9,11 @@ import {
 export default props => (
   <KeyboardAvoidingView
     style={{
-      flex: 1,
       justifyContent: 'center',
     }}
     behavior="padding">
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      {props.children}
+      <>{props.children}</>
     </TouchableWithoutFeedback>
   </KeyboardAvoidingView>
 );
