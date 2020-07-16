@@ -16,4 +16,18 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
+  victory: {
+    ...base,
+    color: 'yellow',
+    fontSize: 48,
+    width: '80%',
+    textAlign: 'center',
+  },
+  defeat: {
+    ...base,
+    color: 'red',
+    fontSize: 48,
+    width: '80%',
+    textAlign: 'center',
+  },
 });

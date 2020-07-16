@@ -22,4 +22,4 @@ const Results = ({
   );
 };
 
-export default SafeView(Results);
+export default SafeView()(Results);

@@ -4,11 +4,24 @@ import SafeView from '../../hocs/SafeView';
 import styles from '../../styles';
 import httpRequest from '../../utils/httpRequest';
 import MapImage from './Map';
+import WizardFooter from './WizardFooter';
 import UI from '../UI';
+
+const SELECT_MAP = 0;
+const SELECT_HEROES = 1;
 
 const ResultsWizard = props => {
   const [resultsObj, setResultsObj] = useState({});
+  const [currentStep, setCurrentStep] = useState(0);
   const [availableMaps, setAvailableMaps] = useState([]);
+
+  const takeStep = target => {
+    if (target === 'back') {
+      setCurrentStep(prev => prev - 1);
+    } else {
+      setCurrentStep(prev => prev + 1);
+    }
+  };
 
   useEffect(() => {
     httpRequest({method: 'GET', url: '/maps'}).then(res => {
@@ -20,13 +33,22 @@ const ResultsWizard = props => {
   return (
     <View style={styles.containers.window}>
       <Text style={styles.typography.heading}>Record New Match</Text>
-      <View style={styles.containers.listContainer}>
-        {availableMaps.map(map => (
-          <MapImage key={map.id} src={map.image} name={map.name} id={map.id} />
-        ))}
-      </View>
+      {currentStep === SELECT_MAP && (
+        <View style={styles.containers.listContainer}>
+          {availableMaps.map(map => (
+            <MapImage
+              key={map.id}
+              src={map.image}
+              name={map.name}
+              id={map.id}
+              takeStep={takeStep}
+              setResultsObj={setResultsObj}
+            />
+          ))}
+        </View>
+      )}
     </View>
   );
 };
 
-export default SafeView(ResultsWizard);
+export default SafeView(WizardFooter)(ResultsWizard);

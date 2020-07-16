@@ -36,6 +36,17 @@ export default StyleSheet.create({
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'row',
-    padding: 0,
+    paddingBottom: 50,
+  },
+  fixedFooter: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 20,
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  footerItemsContainer: {
+    width: '50%',
   },
 });
