@@ -16,6 +16,13 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
+  unselected: {
+    ...base,
+    color: 'grey',
+    width: '80%',
+    fontSize: 48,
+    textAlign: 'center',
+  },
   victory: {
     ...base,
     color: 'yellow',

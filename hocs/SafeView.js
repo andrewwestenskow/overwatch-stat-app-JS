@@ -13,7 +13,7 @@ import {
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
-export default Footer => {
+export default (Footer, footerProps) => {
   return WrappedComponent => {
     return props => {
       return (
@@ -26,7 +26,7 @@ export default Footer => {
                 contentInsetAdjustmentBehavior="automatic">
                 <WrappedComponent {...props} />
               </ScrollView>
-              {Footer ? <Footer /> : null}
+              {Footer ? <Footer {...footerProps} /> : null}
             </View>
           </SafeAreaView>
         </>
@@ -37,7 +37,6 @@ export default Footer => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    flex: 1,
     minHeight: windowHeight,
     width: windowWidth,
     backgroundColor: '#425583',

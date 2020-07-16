@@ -39,6 +39,7 @@ export default StyleSheet.create({
     paddingBottom: 50,
   },
   fixedFooter: {
+    backgroundColor: '#425583',
     position: 'absolute',
     left: 0,
     right: 0,

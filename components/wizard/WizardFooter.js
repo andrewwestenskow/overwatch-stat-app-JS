@@ -10,13 +10,43 @@ const WizardFooter = props => {
   const [isSelected, setIsSelected] = useState(false);
   const [isVictory, setIsVictory] = useState(false);
 
+  const handleVictory = () => {
+    setIsVictory(true);
+    if (!isSelected) {
+      setIsSelected(true);
+    }
+  };
+
+  const handleDefeat = () => {
+    setIsVictory(false);
+    if (!isSelected) {
+      setIsSelected(true);
+    }
+  };
+
   return (
     <View style={styles.containers.fixedFooter}>
       <TouchableOpacity style={styles.containers.footerItemsContainer}>
-        <Text style={styles.typography.defeat}>Defeat</Text>
+        <Text
+          onPress={handleDefeat}
+          style={
+            isSelected && !isVictory
+              ? styles.typography.defeat
+              : styles.typography.unselected
+          }>
+          Defeat
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.containers.footerItemsContainer}>
-        <Text style={styles.typography.victory}>Victory</Text>
+        <Text
+          onPress={handleVictory}
+          style={
+            isSelected && isVictory
+              ? styles.typography.victory
+              : styles.typography.unselected
+          }>
+          Victory
+        </Text>
       </TouchableOpacity>
     </View>
   );
