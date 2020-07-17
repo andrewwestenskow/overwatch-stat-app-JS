@@ -19,4 +19,4 @@ const Register = props => {
     </View>
   );
 };
-export default SafeView()(Register);
+export default SafeView(Register);

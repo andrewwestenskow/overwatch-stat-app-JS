@@ -24,4 +24,4 @@ const Landing = ({navigation}) => {
   );
 };
 
-export default SafeView()(Landing);
+export default SafeView(Landing);

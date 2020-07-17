@@ -39,4 +39,4 @@ const Login = ({navigation}) => {
     </View>
   );
 };
-export default SafeView()(Login);
+export default SafeView(Login);

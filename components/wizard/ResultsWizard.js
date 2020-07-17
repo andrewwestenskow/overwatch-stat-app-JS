@@ -51,4 +51,4 @@ const ResultsWizard = props => {
   );
 };
 
-export default SafeView(WizardFooter)(ResultsWizard);
+export default SafeView(ResultsWizard);

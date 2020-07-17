@@ -8,7 +8,7 @@ export default StyleSheet.create({
   heading: {
     ...base,
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 48,
     marginBottom: 10,
   },
   imageLabel: {

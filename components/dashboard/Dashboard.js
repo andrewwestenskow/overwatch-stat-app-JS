@@ -50,4 +50,4 @@ const Dashboard = props => {
     </View>
   );
 };
-export default SafeView()(Dashboard);
+export default SafeView(Dashboard);
