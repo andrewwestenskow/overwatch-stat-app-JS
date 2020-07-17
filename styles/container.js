@@ -16,7 +16,7 @@ export default StyleSheet.create({
   },
   window: {
     flex: 1,
-    padding: 50,
+    // padding: 50,
     minHeight: windowHeight,
     width: windowWidth,
     backgroundColor: '#425583',
@@ -36,18 +36,16 @@ export default StyleSheet.create({
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
     paddingBottom: 50,
+    width: '100%',
   },
   fixedFooter: {
-    backgroundColor: '#425583',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 20,
     display: 'flex',
     flexDirection: 'row',
   },
   footerItemsContainer: {
     width: '50%',
+    height: 50,
   },
 });

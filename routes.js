@@ -6,6 +6,7 @@ import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import Results from './components/Results/Results';
 import ResultsWizard from './components/wizard/ResultsWizard';
+import SectionSwipe from './components/UI/SectionSwipe';
 
 const Stack = createStackNavigator();
 

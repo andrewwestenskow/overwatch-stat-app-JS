@@ -6,6 +6,7 @@ import httpRequest from '../../utils/httpRequest';
 import MapImage from './Map';
 import WizardFooter from './WizardFooter';
 import UI from '../UI';
+import SectionSwipe from '../UI/SectionSwipe';
 
 const SELECT_MAP = 0;
 const SELECT_HEROES = 1;
@@ -30,10 +31,13 @@ const ResultsWizard = props => {
     });
   }, []);
 
-  return (
-    <View style={styles.containers.window}>
-      <Text style={styles.typography.heading}>Record New Match</Text>
-      {currentStep === SELECT_MAP && (
+  const slides = [
+    {
+      component: <WizardFooter />,
+      id: 0,
+    },
+    {
+      component: (
         <View style={styles.containers.listContainer}>
           {availableMaps.map(map => (
             <MapImage
@@ -46,7 +50,15 @@ const ResultsWizard = props => {
             />
           ))}
         </View>
-      )}
+      ),
+      id: 1,
+    },
+  ];
+
+  return (
+    <View style={styles.containers.window}>
+      <Text style={styles.typography.heading}>Record New Match</Text>
+      <SectionSwipe slides={slides} />
     </View>
   );
 };
