@@ -11,13 +11,24 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const getPlayers = async () => {
+    const res = await httpRequest({method: 'GET', url: '/players'});
+    return res;
+  };
+
   const handleLogin = () => {
     httpRequest({method: 'POST', data: {email, password}, url: '/auth/login'})
       .then(async res => {
         await AsyncStorage.setItem('token', res.token);
-        navigation.navigate('Dashboard');
+        getPlayers().then(players => {
+          if (players[0]) {
+            navigation.navigate('Results', {player: players[0]});
+          } else {
+            navigation.navigate('Dashboard');
+          }
+        });
       })
-      .catch(err => console.log('ERROR'));
+      .catch(err => console.log('ERROR ', err));
   };
 
   return (

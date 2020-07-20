@@ -26,7 +26,6 @@ const ResultsWizard = props => {
 
   useEffect(() => {
     httpRequest({method: 'GET', url: '/maps'}).then(res => {
-      console.log(res);
       setAvailableMaps(res);
     });
   }, []);

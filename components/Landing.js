@@ -5,12 +5,24 @@ import containers from '../styles/container';
 import typography from '../styles/typography';
 import Button from './UI/Button';
 import httpRequest from '../utils/httpRequest';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Landing = ({navigation}) => {
+  const getPlayers = async () => {
+    const res = await httpRequest({method: 'GET', url: '/players'});
+    return res;
+  };
   useEffect(() => {
     httpRequest({method: 'GET', url: '/auth'})
-      .then(res => {
-        navigation.navigate('Dashboard');
+      .then(async res => {
+        await AsyncStorage.setItem('token', res.token);
+        getPlayers().then(players => {
+          if (players[0]) {
+            navigation.navigate('Results', {player: players[0]});
+          } else {
+            navigation.navigate('Dashboard');
+          }
+        });
       })
       .catch(() => console.log('Invalid auth token'));
   }, []);

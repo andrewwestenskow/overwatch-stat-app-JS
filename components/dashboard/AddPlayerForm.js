@@ -16,7 +16,6 @@ const AddPlayerForm = props => {
   }, []);
 
   const savePlayer = () => {
-    console.log('HIT');
     if (!name || !platform) {
       console.log('Missing value: ', name, platform);
       return;
