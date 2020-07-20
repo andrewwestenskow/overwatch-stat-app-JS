@@ -13,7 +13,6 @@ const Results = ({
 }) => {
   return (
     <View style={styles.containers.window}>
-      <Text style={styles.typography.heading}>Results - {player.name}</Text>
       <UI.Button
         title="Record New Match"
         onPress={() => navigation.navigate('ResultsWizard', {player})}

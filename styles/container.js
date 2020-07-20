@@ -16,7 +16,7 @@ export default StyleSheet.create({
   },
   window: {
     flex: 1,
-    // padding: 50,
+    padding: 25,
     minHeight: windowHeight,
     width: windowWidth,
     backgroundColor: '#425583',

@@ -1,4 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
 
 const base = {
   fontFamily: 'BigNoodleTooOblique',
@@ -8,8 +10,9 @@ export default StyleSheet.create({
   heading: {
     ...base,
     textAlign: 'center',
-    fontSize: 48,
-    marginBottom: 10,
+    fontSize: 24,
+    width: '90%',
+    color: '#fff',
   },
   imageLabel: {
     ...base,

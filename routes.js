@@ -6,9 +6,32 @@ import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import Results from './components/Results/Results';
 import ResultsWizard from './components/wizard/ResultsWizard';
-import SectionSwipe from './components/UI/SectionSwipe';
+import Header from './components/Header/Header';
 
 const Stack = createStackNavigator();
+
+const renderHeader = ({scene, previous, navigation}) => {
+  const {options} = scene.descriptor;
+  let title =
+    options.headerTitle !== undefined
+      ? options.headerTitle
+      : options.title !== undefined
+      ? options.title
+      : scene.route.name;
+
+  if (scene.route.params.player) {
+    title = `${title} - ${scene.route.params.player.name}`;
+  }
+  return (
+    <Header
+      title={title}
+      options={options}
+      navigation={navigation}
+      previous={previous}
+      params={scene.route.params}
+    />
+  );
+};
 
 export default () => (
   <Stack.Navigator initialRouteName="Landing">
@@ -30,17 +53,17 @@ export default () => (
     <Stack.Screen
       name="Dashboard"
       component={Dashboard}
-      options={{header: () => null}}
+      options={{header: props => <Header {...props} />}}
     />
     <Stack.Screen
       name="Results"
       component={Results}
-      options={{header: () => null}}
+      options={{headerMode: 'screen', header: renderHeader}}
     />
     <Stack.Screen
       name="ResultsWizard"
       component={ResultsWizard}
-      options={{header: () => null}}
+      options={{header: props => <Header {...props} />}}
     />
   </Stack.Navigator>
 );
