@@ -8,10 +8,7 @@ import UI from '../UI';
 const Results = ({navigation}) => {
   return (
     <View style={styles.containers.window}>
-      <UI.Button
-        title="Record New Match"
-        onPress={() => navigation.navigate('ResultsWizard', {player})}
-      />
+      <Text>RESULTS</Text>
     </View>
   );
 };

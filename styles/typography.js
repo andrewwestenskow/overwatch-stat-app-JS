@@ -3,7 +3,7 @@ import {StyleSheet, Dimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 
 const base = {
-  fontFamily: 'BigNoodleTooOblique',
+  fontFamily: 'Koverwatch',
 };
 
 export default StyleSheet.create({

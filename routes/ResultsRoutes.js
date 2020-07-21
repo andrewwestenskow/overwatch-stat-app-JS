@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from '../components/Header/Header';
 import Results from '../components/Results/Results';
+import ResultsWizard from '../components/wizard/ResultsWizard';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
+import TabNav from '../components/TabNav/TabNav';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -42,13 +44,18 @@ const MainResultsRoutes = props => {
         component={Results}
         initialParams={{...props.route.params}}
       />
+      <Stack.Screen
+        name="Add Match"
+        component={ResultsWizard}
+        initialParams={{...props.route.params}}
+      />
     </Stack.Navigator>
   );
 };
 
 export default ({props}) => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Results" tabBar={TabNav}>
       <Tab.Screen name="Results">
         {renderComponent(MainResultsRoutes, props)}
       </Tab.Screen>
