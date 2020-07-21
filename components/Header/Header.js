@@ -14,6 +14,7 @@ const Header = props => {
         rounded
         title="B"
         size="medium"
+        onPress={props.navigation.openDrawer}
       />
       <Text style={externalStyles.typography.heading}>{props.title}</Text>
     </View>

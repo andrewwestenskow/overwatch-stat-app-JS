@@ -5,12 +5,7 @@ import styles from '../../styles';
 import httpRequest from '../../utils/httpRequest';
 import UI from '../UI';
 
-const Results = ({
-  route: {
-    params: {player},
-  },
-  navigation,
-}) => {
+const Results = ({navigation}) => {
   return (
     <View style={styles.containers.window}>
       <UI.Button

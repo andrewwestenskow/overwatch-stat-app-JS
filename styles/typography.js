@@ -9,10 +9,10 @@ const base = {
 export default StyleSheet.create({
   heading: {
     ...base,
-    textAlign: 'center',
     fontSize: 24,
     width: '90%',
     color: '#fff',
+    marginLeft: windowWidth * 0.05,
   },
   imageLabel: {
     ...base,

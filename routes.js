@@ -53,7 +53,7 @@ export default () => (
     <Stack.Screen
       name="Dashboard"
       component={Dashboard}
-      options={{header: props => <Header {...props} />}}
+      options={{headerMode: 'screen', header: renderHeader}}
     />
     <Stack.Screen
       name="Results"
@@ -63,7 +63,7 @@ export default () => (
     <Stack.Screen
       name="ResultsWizard"
       component={ResultsWizard}
-      options={{header: props => <Header {...props} />}}
+      options={{headerMode: 'screen', header: renderHeader}}
     />
   </Stack.Navigator>
 );
