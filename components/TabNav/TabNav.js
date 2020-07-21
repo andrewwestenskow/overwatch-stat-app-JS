@@ -14,13 +14,15 @@ const iconWidth = windowWidth * 0.1;
 const TabNav = props => {
   return (
     <View style={styles.tabNav}>
-      <TouchableOpacity
-        onPress={() =>
-          props.navigation.navigate('Results', {screen: 'Results'})
-        }
-        style={{...styles.navSection, ...styles.leftSection}}>
-        <Text style={styles.navText}>Results</Text>
-      </TouchableOpacity>
+      <View style={{...styles.navSection, ...styles.leftSection}}>
+        <Text
+          onPress={() =>
+            props.navigation.navigate('Results', {screen: 'Results'})
+          }
+          style={styles.navText}>
+          Results
+        </Text>
+      </View>
       <Icon
         name="add-circle"
         reverse
@@ -32,9 +34,9 @@ const TabNav = props => {
           props.navigation.navigate('Results', {screen: 'Add Match'})
         }
       />
-      <TouchableOpacity style={{...styles.navSection, ...styles.rightSection}}>
+      <View style={{...styles.navSection, ...styles.rightSection}}>
         <Text style={styles.navText}>Profile</Text>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    bottom: iconWidth / 4,
+    bottom: 0,
     left: windowWidth / 2 - iconWidth - iconWidth / 4,
   },
   navText: {

@@ -7,7 +7,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 50,
+    paddingBottom: 120,
     borderColor: '#000',
     borderWidth: 1,
     minHeight: windowHeight,
@@ -16,7 +16,6 @@ export default StyleSheet.create({
   },
   window: {
     flex: 1,
-    padding: 25,
     minHeight: windowHeight,
     width: windowWidth,
     backgroundColor: '#425583',
@@ -37,7 +36,7 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    paddingBottom: 50,
+    paddingBottom: 200,
     width: '100%',
   },
   fixedFooter: {

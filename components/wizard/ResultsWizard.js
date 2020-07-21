@@ -56,7 +56,6 @@ const ResultsWizard = props => {
 
   return (
     <View style={styles.containers.window}>
-      <Text style={styles.typography.heading}>Record New Match</Text>
       <SectionSwipe slides={slides} />
     </View>
   );
