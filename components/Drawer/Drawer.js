@@ -1,8 +1,21 @@
 import React from 'react';
-import {ScrollView, View, Text, StyleSheet} from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import httpRequest from '../../utils/httpRequest';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default props => {
-  // console.log(Object.keys(props.state));
+  const handleLogout = async () => {
+    await AsyncStorage.clear();
+    httpRequest({method: 'DELETE', url: '/auth/logout'}).then(() => {
+      props.authNavigate('Landing');
+    });
+  };
   return (
     <View style={styles.drawerContainer}>
       <View style={styles.scroll}>
@@ -52,9 +65,9 @@ export default props => {
         <View style={styles.drawerItem}>
           <Text style={styles.drawerItemText}>Add New Player</Text>
         </View>
-        <View style={styles.drawerItem}>
+        <TouchableOpacity onPress={handleLogout} style={styles.drawerItem}>
           <Text style={styles.drawerItemText}>Logout</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -24,12 +24,11 @@ export function toggleDrawer() {
 
 //* Drawer renders screens
 export default props => {
-  console.log(
-    drawerRef.current ? drawerRef.current.getCurrentRoute().name : 'null',
-  );
   return (
     <Drawer.Navigator
-      drawerContent={props => <CustomDrawer {...props} />}
+      drawerContent={newProps => (
+        <CustomDrawer {...newProps} authNavigate={props.authNavigate} />
+      )}
       drawerType="front"
       initialRouteName="Results">
       <Drawer.Screen

@@ -22,7 +22,7 @@ const Login = ({navigation}) => {
         await AsyncStorage.setItem('token', res.token);
         getPlayers().then(players => {
           if (players[0]) {
-            navigation.navigate('Results', {player: players[0]});
+            navigation.navigate('ResultsContainer', {player: players[0]});
           } else {
             navigation.navigate('Dashboard');
           }
