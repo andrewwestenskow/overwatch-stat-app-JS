@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 const base = {
-  fontFamily: 'BigNoodleTooOblique',
+  fontFamily: 'Koverwatch',
 };
 
 const Button = props => {

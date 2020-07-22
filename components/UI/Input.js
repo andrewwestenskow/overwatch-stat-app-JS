@@ -5,7 +5,7 @@ export default props => (
   <TextInput style={style.input} onChangeText={props.onChange} {...props} />
 );
 const base = {
-  fontFamily: 'BigNoodleTooOblique',
+  fontFamily: 'Roboto',
 };
 const style = StyleSheet.create({
   input: {

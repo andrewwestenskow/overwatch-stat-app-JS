@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
+import {PlayersContext} from '../context/stores/players';
 import {View, Text} from 'react-native';
 import SafeView from '../hocs/SafeView';
 import containers from '../styles/container';
@@ -8,6 +9,7 @@ import httpRequest from '../utils/httpRequest';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Landing = ({navigation}) => {
+  const {setPlayers, setPlayer} = useContext(PlayersContext);
   const getPlayers = async () => {
     const res = await httpRequest({method: 'GET', url: '/players'});
     return res;
@@ -17,8 +19,20 @@ const Landing = ({navigation}) => {
       .then(async res => {
         await AsyncStorage.setItem('token', res.token);
         getPlayers().then(players => {
+          setPlayers(players);
           if (players[0]) {
-            navigation.navigate('ResultsContainer', {player: players[0]});
+            setPlayer(players[0]);
+            navigation.navigate('ResultsContainer');
+          } else {
+            navigation.navigate('ResultsContainer', {
+              screen: 'Results',
+              params: {
+                screen: 'Drawer',
+                params: {
+                  screen: 'Add Player',
+                },
+              },
+            });
           }
         });
       })

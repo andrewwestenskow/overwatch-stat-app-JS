@@ -10,12 +10,15 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthRoutes from './routes/AuthRoutes';
 import {drawerRef} from './routes/DrawerNav';
+import PlayersProvider from './context/stores/players';
 
 const App = () => {
   return (
-    <NavigationContainer ref={drawerRef}>
-      <AuthRoutes />
-    </NavigationContainer>
+    <PlayersProvider>
+      <NavigationContainer ref={drawerRef}>
+        <AuthRoutes />
+      </NavigationContainer>
+    </PlayersProvider>
   );
 };
 

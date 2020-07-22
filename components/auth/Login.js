@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {PlayersContext} from '../../context/stores/players';
 import {View, Text} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import UI from '../UI';
@@ -11,6 +12,8 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const {setPlayer, setPlayers} = useContext(PlayersContext);
+
   const getPlayers = async () => {
     const res = await httpRequest({method: 'GET', url: '/players'});
     return res;
@@ -21,10 +24,20 @@ const Login = ({navigation}) => {
       .then(async res => {
         await AsyncStorage.setItem('token', res.token);
         getPlayers().then(players => {
+          setPlayers(players);
           if (players[0]) {
-            navigation.navigate('ResultsContainer', {player: players[0]});
+            setPlayer(players[0]);
+            navigation.navigate('ResultsContainer');
           } else {
-            navigation.navigate('Dashboard');
+            navigation.navigate('ResultsContainer', {
+              screen: 'Results',
+              params: {
+                screen: 'Drawer',
+                params: {
+                  screen: 'Add Player',
+                },
+              },
+            });
           }
         });
       })

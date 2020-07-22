@@ -4,6 +4,7 @@ import UI from '../UI';
 import SafeView from '../../hocs/SafeView';
 import containers from '../../styles/container';
 import typography from '../../styles/typography';
+import httpRequest from '../../utils/httpRequest';
 
 const Register = props => {
   return (
