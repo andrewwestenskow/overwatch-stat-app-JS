@@ -9,7 +9,6 @@ const windowWidth = Dimensions.get('window').width;
 
 const Header = props => {
   const {player} = useContext(PlayersContext);
-
   return (
     <View style={styles.header}>
       {player.portrait ? (
@@ -38,7 +37,9 @@ const Header = props => {
           onPress={() => toggleDrawer()}
         />
       )}
-      <Text style={externalStyles.typography.heading}>{props.title}</Text>
+      <Text style={externalStyles.typography.heading}>
+        {props.title} - {player.name}
+      </Text>
     </View>
   );
 };

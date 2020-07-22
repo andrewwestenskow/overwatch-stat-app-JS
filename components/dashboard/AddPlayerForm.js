@@ -10,7 +10,7 @@ const AddPlayerForm = props => {
   const [platform, setPlatform] = useState(null);
   const [availablePlatforms, setAvailablePlatforms] = useState([]);
 
-  const {setPlayer} = useContext(PlayersContext);
+  const {setPlayer, getPlayers} = useContext(PlayersContext);
 
   useEffect(() => {
     httpRequest({method: 'GET', url: '/platforms'}).then(res => {
@@ -27,8 +27,11 @@ const AddPlayerForm = props => {
         method: 'POST',
         url: '/players',
         data: {name, platform_id: platform},
-      }).then(() => {
-        props.getPlayers();
+      }).then(data => {
+        setPlayer(data);
+        getPlayers().then(() => {
+          props.navigation.navigate('Results');
+        });
       });
     }
   };

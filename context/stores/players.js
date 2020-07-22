@@ -1,4 +1,5 @@
 import React, {createContext, useState} from 'react';
+import httpRequest from '../../utils/httpRequest';
 
 const PlayersContext = createContext();
 PlayersContext.displayName = 'PlayersStore';
@@ -19,8 +20,15 @@ export default props => {
   const [players, setPlayers] = useState(initialState.players);
   const [player, setPlayer] = useState(initialState.player);
 
+  const getPlayers = async () => {
+    const res = await httpRequest({method: 'GET', url: '/players'});
+    setPlayers(res);
+    return Promise.resolve();
+  };
+
   return (
-    <PlayersContext.Provider value={{players, setPlayers, player, setPlayer}}>
+    <PlayersContext.Provider
+      value={{players, setPlayers, player, setPlayer, getPlayers}}>
       {props.children}
     </PlayersContext.Provider>
   );

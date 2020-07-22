@@ -19,6 +19,7 @@ const Landing = ({navigation}) => {
       .then(async res => {
         await AsyncStorage.setItem('token', res.token);
         getPlayers().then(players => {
+          console.log(players);
           setPlayers(players);
           if (players[0]) {
             setPlayer(players[0]);

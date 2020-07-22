@@ -15,9 +15,6 @@ const renderHeader = ({scene, previous, navigation}) => {
       ? options.title
       : scene.route.name;
 
-  if (scene.route.params.player) {
-    title = `${title} - ${scene.route.params.player.name}`;
-  }
   return (
     <Header
       title={title}
@@ -25,7 +22,6 @@ const renderHeader = ({scene, previous, navigation}) => {
       navigation={navigation}
       previous={previous}
       params={scene.route.params}
-      player={scene.route.params.player}
     />
   );
 };
