@@ -1,8 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
-import ResultsRoutes from '../routes/ResultsRoutes';
+import TabRoutes from '../routes/TabNav';
 
 const ResultsContainer = props => {
-  return <ResultsRoutes props={props} />;
+  return <TabRoutes props={props} />;
 };
 export default ResultsContainer;

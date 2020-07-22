@@ -2,19 +2,26 @@ import React from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import externalStyles from '../../styles';
+import {openDrawer} from '../../routes/DrawerNav';
 
 const windowWidth = Dimensions.get('window').width;
 
 const Header = props => {
+  const {player, navigation} = props;
+
   return (
     <View style={styles.header}>
       <Avatar
         overlayContainerStyle={{backgroundColor: 'grey'}}
-        containerStyle={{width: windowWidth * 0.1, height: windowWidth * 0.1}}
+        containerStyle={{
+          width: windowWidth * 0.1,
+          height: windowWidth * 0.1,
+        }}
         rounded
-        title="B"
+        title={player.name[0]}
+        source={!player.private ? {uri: player.portrait} : {}}
         size="medium"
-        onPress={props.navigation.openDrawer}
+        onPress={() => openDrawer()}
       />
       <Text style={externalStyles.typography.heading}>{props.title}</Text>
     </View>

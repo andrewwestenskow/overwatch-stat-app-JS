@@ -9,10 +9,11 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthRoutes from './routes/AuthRoutes';
+import {drawerRef} from './routes/DrawerNav';
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={drawerRef}>
       <AuthRoutes />
     </NavigationContainer>
   );
