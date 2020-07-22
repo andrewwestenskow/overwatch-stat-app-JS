@@ -3,10 +3,12 @@ import Results from '../components/Results/Results';
 import ResultsWizard from '../components/wizard/ResultsWizard';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {DrawerActions} from '@react-navigation/native';
+import CustomDrawer from '../components/Drawer/Drawer';
 
 const Drawer = createDrawerNavigator();
 
 export const drawerRef = createRef();
+
 export function navigateDrawer(name, params) {
   drawerRef.current?.navigate(name, params);
 }
@@ -16,11 +18,20 @@ export function openDrawer() {
 export function closeDrawer() {
   drawerRef.current?.dispatch(DrawerActions.closeDrawer());
 }
+export function toggleDrawer() {
+  drawerRef.current?.dispatch(DrawerActions.toggleDrawer());
+}
 
 //* Drawer renders screens
 export default props => {
+  console.log(
+    drawerRef.current ? drawerRef.current.getCurrentRoute().name : 'null',
+  );
   return (
-    <Drawer.Navigator drawerType="front" initialRouteName="Results">
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawer {...props} />}
+      drawerType="front"
+      initialRouteName="Results">
       <Drawer.Screen
         name="Results"
         component={Results}

@@ -8,35 +8,26 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 const windowWidth = Dimensions.get('window').width;
+import {navigateDrawer} from '../../routes/DrawerNav';
 
-const iconWidth = windowWidth * 0.1;
+const iconWidth = windowWidth * 0.07;
 
 const TabNav = props => {
   return (
     <View style={styles.tabNav}>
-      <View style={{...styles.navSection, ...styles.leftSection}}>
-        <Text
-          onPress={() =>
-            props.navigation.navigate('Results', {screen: 'Results'})
-          }
-          style={styles.navText}>
-          Results
-        </Text>
-      </View>
-      <Icon
-        name="add-circle"
-        reverse
-        raised
-        color="#ff8900"
-        size={iconWidth}
-        containerStyle={styles.icon}
-        onPress={() =>
-          props.navigation.navigate('Results', {screen: 'Add Match'})
-        }
-      />
-      <View style={{...styles.navSection, ...styles.rightSection}}>
+      <TouchableOpacity
+        onPress={() => navigateDrawer('Results')}
+        style={{...styles.navSection, ...styles.leftSection}}>
+        <Text style={styles.navText}>Results</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigateDrawer('Add Match')}
+        style={styles.middle}>
+        <Text style={styles.navText}>Add Match</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={{...styles.navSection, ...styles.rightSection}}>
         <Text style={styles.navText}>Profile</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -44,24 +35,26 @@ export default TabNav;
 
 const styles = StyleSheet.create({
   tabNav: {
-    height: 80,
+    height: 50,
     backgroundColor: '#000',
     display: 'flex',
     flexDirection: 'row',
     position: 'relative',
   },
   navSection: {
-    width: '50%',
+    width: '35%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   middle: {
-    width: '20%',
+    width: '30%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   icon: {
     position: 'absolute',
-    bottom: 0,
-    left: windowWidth / 2 - iconWidth - iconWidth / 4,
+    bottom: -5,
+    left: windowWidth / 2 - iconWidth - iconWidth / 3,
   },
   navText: {
     color: '#fff',

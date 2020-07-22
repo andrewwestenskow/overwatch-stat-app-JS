@@ -6,7 +6,7 @@ import httpRequest from '../../utils/httpRequest';
 import UI from '../UI';
 
 const Results = props => {
-  console.log(Object.keys(props.route.params.player));
+  // console.log(Object.keys(props.route.params.player));
   return (
     <View style={styles.containers.window}>
       <Text>RESULTS</Text>

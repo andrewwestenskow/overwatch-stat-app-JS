@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import externalStyles from '../../styles';
-import {openDrawer} from '../../routes/DrawerNav';
+import {toggleDrawer} from '../../routes/DrawerNav';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -21,7 +21,7 @@ const Header = props => {
         title={player.name[0]}
         source={!player.private ? {uri: player.portrait} : {}}
         size="medium"
-        onPress={() => openDrawer()}
+        onPress={() => toggleDrawer()}
       />
       <Text style={externalStyles.typography.heading}>{props.title}</Text>
     </View>

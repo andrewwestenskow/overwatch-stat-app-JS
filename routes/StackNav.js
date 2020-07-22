@@ -35,7 +35,11 @@ export default props => {
   return (
     <Stack.Navigator
       initialRouteName="Drawer"
-      screenOptions={{headerMode: 'screen', header: renderHeader}}>
+      screenOptions={{
+        headerMode: 'screen',
+        header: renderHeader,
+        title: 'Results',
+      }}>
       <Stack.Screen initialParams={{...props.route.params}} name="Drawer">
         {renderComponent(DrawerNav, props)}
       </Stack.Screen>
