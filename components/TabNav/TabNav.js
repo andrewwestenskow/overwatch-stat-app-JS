@@ -1,16 +1,7 @@
 import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
-import {Icon} from 'react-native-elements';
-const windowWidth = Dimensions.get('window').width;
-import {navigateDrawer} from '../../routes/DrawerNav';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-const iconWidth = windowWidth * 0.07;
+import {navigateDrawer} from '../../routes/DrawerNav';
 
 const TabNav = props => {
   return (
@@ -50,11 +41,6 @@ const styles = StyleSheet.create({
     width: '30%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  icon: {
-    position: 'absolute',
-    bottom: -5,
-    left: windowWidth / 2 - iconWidth - iconWidth / 3,
   },
   navText: {
     color: '#fff',
