@@ -40,7 +40,7 @@ const Landing = ({navigation}) => {
   }, []);
 
   return (
-    <View style={containers.container}>
+    <View style={{...containers.container, alignItems: 'center'}}>
       <Text style={typography.heading}>Welcome to Overwatch Match Tracker</Text>
       <Button onPress={() => navigation.navigate('Register')} title="Sign Up" />
       <Button onPress={() => navigation.navigate('Login')} title="Log In" />

@@ -58,28 +58,19 @@ const Register = ({navigation}) => {
   return (
     <View style={containers.container}>
       <UI.FormWrapper>
-        <>
-          <Text style={typography.heading}>Sign Up</Text>
-          <UI.Input onChange={text => setEmail(text)} placeholder="Email" />
-          <UI.Input
-            onChange={text => setPassword(text)}
-            placeholder="Password"
-          />
-          <UI.Input onChange={text => setName(text)} placeholder="Gamertag" />
-          <UI.Select
-            selectedValue={platform}
-            onValueChange={value => setPlatform(value)}>
-            <UI.Option label="Select a platform" value={null} />
-            {availablePlatforms.map(option => (
-              <UI.Option
-                label={option.name}
-                value={option.id}
-                key={option.id}
-              />
-            ))}
-          </UI.Select>
-          <UI.Button onPress={handleRegister} title="Sign Up" />
-        </>
+        <Text style={typography.heading}>Sign Up</Text>
+        <UI.Input onChange={text => setEmail(text)} placeholder="Email" />
+        <UI.Input onChange={text => setPassword(text)} placeholder="Password" />
+        <UI.Input onChange={text => setName(text)} placeholder="Gamertag" />
+        <UI.Select
+          selectedValue={platform}
+          onValueChange={value => setPlatform(value)}>
+          <UI.Option label="Select a platform" value={null} />
+          {availablePlatforms.map(option => (
+            <UI.Option label={option.name} value={option.id} key={option.id} />
+          ))}
+        </UI.Select>
+        <UI.Button onPress={handleRegister} title="Sign Up" />
       </UI.FormWrapper>
     </View>
   );
