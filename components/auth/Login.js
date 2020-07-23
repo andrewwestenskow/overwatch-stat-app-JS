@@ -12,12 +12,7 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {setPlayer, setPlayers} = useContext(PlayersContext);
-
-  const getPlayers = async () => {
-    const res = await httpRequest({method: 'GET', url: '/players'});
-    return res;
-  };
+  const {setPlayer, setPlayers, getPlayers} = useContext(PlayersContext);
 
   const handleLogin = () => {
     httpRequest({method: 'POST', data: {email, password}, url: '/auth/login'})

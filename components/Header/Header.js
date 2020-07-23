@@ -20,7 +20,7 @@ const Header = props => {
           }}
           rounded
           title={player.name[0]}
-          source={!player.private ? {uri: player.portrait} : {}}
+          source={player.portrait ? {uri: player.portrait} : {}}
           size="medium"
           onPress={() => toggleDrawer()}
         />

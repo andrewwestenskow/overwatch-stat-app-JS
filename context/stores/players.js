@@ -23,7 +23,7 @@ export default props => {
   const getPlayers = async () => {
     const res = await httpRequest({method: 'GET', url: '/players'});
     setPlayers(res);
-    return Promise.resolve();
+    return res;
   };
 
   return (

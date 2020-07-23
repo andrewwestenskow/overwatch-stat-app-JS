@@ -5,9 +5,10 @@ import {ListItem} from 'react-native-elements';
 import httpRequest from '../../utils/httpRequest';
 import AsyncStorage from '@react-native-community/async-storage';
 
-const renderPlayer = ({item}) => {
+const renderPlayer = ({item, onPress}) => {
   return (
     <ListItem
+      onPress={() => onPress(item)}
       title={item.name}
       leftAvatar={{
         source: item.portrait && {uri: item.portrait},
@@ -21,7 +22,12 @@ const renderPlayer = ({item}) => {
 };
 
 export default props => {
-  const {players} = useContext(PlayersContext);
+  const {players, setPlayer} = useContext(PlayersContext);
+
+  const handlePress = item => {
+    setPlayer(item);
+    props.navigation.closeDrawer();
+  };
 
   const handleLogout = async () => {
     await AsyncStorage.clear();
@@ -34,7 +40,7 @@ export default props => {
       <View style={styles.scroll}>
         <FlatList
           data={players}
-          renderItem={renderPlayer}
+          renderItem={props => renderPlayer({...props, onPress: handlePress})}
           keyExtractor={player => player.id.toString()}
         />
       </View>
