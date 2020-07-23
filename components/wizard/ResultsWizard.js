@@ -1,64 +1,30 @@
 import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import SafeView from '../../hocs/SafeView';
-import styles from '../../styles';
+import {View, Text} from 'react-native';
+import WizardRoutes from '../../routes/WizardRoutes';
 import httpRequest from '../../utils/httpRequest';
-import MapImage from './Map';
-import WizardFooter from './WizardFooter';
-import UI from '../UI';
-import SectionSwipe from '../UI/SectionSwipe';
-
-const SELECT_MAP = 0;
-const SELECT_HEROES = 1;
 
 const ResultsWizard = props => {
-  const [resultsObj, setResultsObj] = useState({});
-  const [currentStep, setCurrentStep] = useState(0);
   const [availableMaps, setAvailableMaps] = useState([]);
-
-  const takeStep = target => {
-    if (target === 'back') {
-      setCurrentStep(prev => prev - 1);
-    } else {
-      setCurrentStep(prev => prev + 1);
-    }
-  };
+  const [availableHeroes, setAvailableHeroes] = useState([]);
 
   useEffect(() => {
-    httpRequest({method: 'GET', url: '/maps'}).then(res => {
-      setAvailableMaps(res);
-    });
+    async function fetchData() {
+      const maps = await httpRequest({method: 'GET', url: '/maps'});
+      const heroes = await httpRequest({method: 'GET', url: '/heroes'});
+      setAvailableHeroes(heroes);
+      setAvailableMaps(maps);
+    }
+    fetchData();
   }, []);
 
-  const slides = [
-    {
-      component: <WizardFooter />,
-      id: 0,
-    },
-    {
-      component: (
-        <View style={styles.containers.listContainer}>
-          {availableMaps.map(map => (
-            <MapImage
-              key={map.id}
-              src={map.image}
-              name={map.name}
-              id={map.id}
-              takeStep={takeStep}
-              setResultsObj={setResultsObj}
-            />
-          ))}
-        </View>
-      ),
-      id: 1,
-    },
-  ];
-
   return (
-    <View style={styles.containers.window}>
-      <SectionSwipe slides={slides} />
-    </View>
+    <>
+      <View>
+        <Text>MY BALLS</Text>
+      </View>
+      <WizardRoutes heroes={availableHeroes} maps={availableMaps} />
+    </>
   );
 };
 
-export default SafeView(ResultsWizard);
+export default ResultsWizard;

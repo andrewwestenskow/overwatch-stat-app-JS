@@ -11,10 +11,12 @@ import httpRequest from '../../utils/httpRequest';
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const {setPlayer, setPlayers, getPlayers} = useContext(PlayersContext);
 
   const handleLogin = () => {
+    setIsLoading(true);
     httpRequest({method: 'POST', data: {email, password}, url: '/auth/login'})
       .then(async res => {
         await AsyncStorage.setItem('token', res.token);
@@ -36,7 +38,8 @@ const Login = ({navigation}) => {
           }
         });
       })
-      .catch(err => console.log('ERROR ', err));
+      .catch(err => console.log('ERROR ', err))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -52,7 +55,7 @@ const Login = ({navigation}) => {
             onChangeText={value => setPassword(value)}
             placeholder="Password"
           />
-          <UI.Button onPress={handleLogin} title="Log In" />
+          <UI.Button loading={isLoading} onPress={handleLogin} title="Log In" />
         </>
       </UI.FormWrapper>
     </View>

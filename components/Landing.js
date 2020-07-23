@@ -10,10 +10,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const Landing = ({navigation}) => {
   const {setPlayers, setPlayer} = useContext(PlayersContext);
+
   const getPlayers = async () => {
     const res = await httpRequest({method: 'GET', url: '/players'});
     return res;
   };
+
   useEffect(() => {
     httpRequest({method: 'GET', url: '/auth'})
       .then(async res => {

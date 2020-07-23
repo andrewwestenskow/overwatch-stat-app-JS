@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import styles from '../../styles';
 
-const WizardFooter = props => {
+const VictoryDefeat = props => {
   const [isSelected, setIsSelected] = useState(false);
   const [isVictory, setIsVictory] = useState(false);
 
@@ -48,4 +48,4 @@ const WizardFooter = props => {
   );
 };
 
-export default WizardFooter;
+export default VictoryDefeat;

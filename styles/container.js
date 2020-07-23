@@ -8,8 +8,6 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingBottom: 120,
-    borderColor: '#000',
-    borderWidth: 1,
     minHeight: windowHeight,
     width: windowWidth,
     backgroundColor: '#425583',
@@ -26,17 +24,10 @@ export default StyleSheet.create({
   },
   listItem: {
     padding: 15,
-    borderColor: '#000',
-    borderWidth: 1,
     justifyContent: 'space-between',
     marginBottom: 10,
   },
   listContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    paddingBottom: 200,
     width: '100%',
   },
   fixedFooter: {

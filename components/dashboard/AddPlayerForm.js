@@ -9,6 +9,7 @@ const AddPlayerForm = props => {
   const [name, setName] = useState('');
   const [platform, setPlatform] = useState(null);
   const [availablePlatforms, setAvailablePlatforms] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {setPlayer, getPlayers} = useContext(PlayersContext);
 
@@ -23,16 +24,19 @@ const AddPlayerForm = props => {
       console.log('Missing value: ', name, platform);
       return;
     } else {
+      setIsLoading(true);
       httpRequest({
         method: 'POST',
         url: '/players',
         data: {name, platform_id: platform},
-      }).then(data => {
-        setPlayer(data);
-        getPlayers().then(() => {
-          props.navigation.navigate('Results');
-        });
-      });
+      })
+        .then(data => {
+          setPlayer(data);
+          getPlayers().then(() => {
+            props.navigation.navigate('Results');
+          });
+        })
+        .finally(() => setIsLoading(false));
     }
   };
 
@@ -48,7 +52,7 @@ const AddPlayerForm = props => {
             <UI.Option label={option.name} value={option.id} key={option.id} />
           ))}
         </UI.Select>
-        <UI.Button onPress={savePlayer} title="Save" />
+        <UI.Button loading={isLoading} onPress={savePlayer} title="Save" />
       </UI.FormWrapper>
     </View>
   );

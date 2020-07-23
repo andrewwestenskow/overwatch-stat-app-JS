@@ -55,8 +55,6 @@ const SectionSwipe = props => {
       config={config}
       style={{
         flex: 1,
-        borderColor: '#000',
-        borderWidth: 1,
       }}>
       <Indicators
         slides={slides}
