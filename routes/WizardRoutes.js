@@ -1,6 +1,5 @@
 import React from 'react';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import renderComponent from '../utils/renderComponent';
 import Maps from '../components/wizard/Maps';
 import Heroes from '../components/wizard/Heroes';
 import screenWrapper from './ScreenWrapper';

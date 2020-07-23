@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList} from 'react-native';
+import {SectionList, Text} from 'react-native';
 import {ListItem} from 'react-native-elements';
-import httpRequest from '../../utils/httpRequest';
+import {deriveHeroRole} from '../../constants/heroRoles';
 import styles from '../../styles';
 
 const renderMap = ({item}) => {
@@ -22,12 +22,26 @@ const renderMap = ({item}) => {
 };
 
 const Heroes = props => {
+  const formatData = props.heroes.reduce((acc, hero) => {
+    const index = acc.findIndex(section => section.id === hero.role_id);
+    if (index === -1) {
+      const name = deriveHeroRole(hero.role_id);
+      acc.push({title: name, id: hero.role_id, data: [hero]});
+    } else {
+      acc[index].data.push(hero);
+    }
+    return acc;
+  }, []);
+
   return (
-    <FlatList
+    <SectionList
       contentContainerStyle={styles.containers.listContainer}
-      data={props.heroes}
+      sections={formatData}
       renderItem={itemProps => renderMap({...itemProps})}
       keyExtractor={item => item.id.toString()}
+      renderSectionHeader={({section: {title}}) => (
+        <Text style={styles.containers.sectionHeading}>{title}</Text>
+      )}
     />
   );
 };

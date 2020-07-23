@@ -37,9 +37,7 @@ const Header = props => {
           onPress={() => toggleDrawer()}
         />
       )}
-      <Text style={externalStyles.typography.heading}>
-        {props.title} - {player.name}
-      </Text>
+      <Text style={externalStyles.typography.heading}>{player.name}</Text>
     </View>
   );
 };

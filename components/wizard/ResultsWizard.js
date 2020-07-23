@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import WizardRoutes from '../../routes/WizardRoutes';
+import WizardHeader from './WizardHeader';
 import httpRequest from '../../utils/httpRequest';
 
 const ResultsWizard = props => {
@@ -19,9 +20,7 @@ const ResultsWizard = props => {
 
   return (
     <>
-      <View>
-        <Text>MY BALLS</Text>
-      </View>
+      <WizardHeader />
       <WizardRoutes heroes={availableHeroes} maps={availableMaps} />
     </>
   );
