@@ -1,12 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer, useContext} from 'react';
 import {View, Text} from 'react-native';
+import matchReducer, {actions, initialState} from './wizardReducer';
 import WizardRoutes from '../../routes/WizardRoutes';
 import WizardHeader from './WizardHeader';
+import {PlayersContext} from '../../context/stores/players';
 import httpRequest from '../../utils/httpRequest';
 
 const ResultsWizard = props => {
+  const {player} = useContext(PlayersContext);
   const [availableMaps, setAvailableMaps] = useState([]);
   const [availableHeroes, setAvailableHeroes] = useState([]);
+  const [match, dispatch] = useReducer(matchReducer, initialState, () => ({
+    ...initialState,
+    player_id: player.id,
+  }));
 
   useEffect(() => {
     async function fetchData() {
@@ -18,10 +25,18 @@ const ResultsWizard = props => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    dispatch({type: actions.UPDATE_PLAYER_ID, payload: player.id});
+  }, [player]);
+
   return (
     <>
       <WizardHeader />
-      <WizardRoutes heroes={availableHeroes} maps={availableMaps} />
+      <WizardRoutes
+        heroes={availableHeroes}
+        maps={availableMaps}
+        reducer={{dispatch, actions}}
+      />
     </>
   );
 };

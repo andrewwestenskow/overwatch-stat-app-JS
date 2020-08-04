@@ -10,7 +10,7 @@ const renderMap = ({item, onPress}) => {
     <ListItem
       bottomDivider
       chevron
-      onPress={onPress}
+      onPress={() => onPress(item.id)}
       leftAvatar={{
         source: {uri: item.image},
         rounded: false,
@@ -36,6 +36,10 @@ const Maps = props => {
   }, []);
 
   const handlePress = mapId => {
+    props.reducer.dispatch({
+      type: props.reducer.actions.UPDATE_MAP_ID,
+      payload: mapId,
+    });
     props.navigation.navigate('Heroes');
   };
 
