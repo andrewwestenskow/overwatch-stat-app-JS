@@ -1,10 +1,15 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import VictoryDefeat from './VictoryDefeat';
 
 const WizardHeader = props => {
+  const {
+    reducer: {dispatch, actions, match},
+  } = props;
   return (
     <View style={styles.sectionHeader}>
-      <Text>Add Shit</Text>
+      <VictoryDefeat reducer={{dispatch, actions}} />
+      {match.map_id && <Text>Map: {match.map_id}</Text>}
     </View>
   );
 };

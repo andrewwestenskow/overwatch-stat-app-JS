@@ -31,11 +31,15 @@ const ResultsWizard = props => {
 
   return (
     <>
-      <WizardHeader />
       <WizardRoutes
         heroes={availableHeroes}
         maps={availableMaps}
-        reducer={{dispatch, actions}}
+        reducer={{dispatch, actions, match}}
+      />
+      <WizardHeader
+        maps={availableMaps}
+        heroes={availableHeroes}
+        reducer={{dispatch, actions, match}}
       />
     </>
   );

@@ -20,6 +20,14 @@ const VictoryDefeat = props => {
     }
   };
 
+  useEffect(() => {
+    console.log(isVictory);
+    props.reducer.dispatch({
+      type: props.reducer.actions.UPDATE_WIN,
+      payload: isVictory,
+    });
+  }, [isVictory]);
+
   return (
     <View style={styles.containers.fixedFooter}>
       <TouchableOpacity style={styles.containers.footerItemsContainer}>

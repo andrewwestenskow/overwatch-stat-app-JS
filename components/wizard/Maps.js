@@ -5,7 +5,7 @@ import {deriveGameMode} from '../../constants/gameModes';
 import {Text, StyleSheet} from 'react-native';
 import styles from '../../styles';
 
-const renderMap = ({item, onPress}) => {
+const renderMap = ({item, onPress, match}) => {
   return (
     <ListItem
       bottomDivider
@@ -18,6 +18,9 @@ const renderMap = ({item, onPress}) => {
           resizeMethod: 'resize',
         },
       }}
+      rightIcon={
+        match.map_id === item.id ? {name: 'check', color: 'green'} : null
+      }
       title={item.name}
     />
   );
@@ -47,7 +50,13 @@ const Maps = props => {
     <SectionList
       contentContainerStyle={styles.containers.listContainer}
       sections={formatData}
-      renderItem={itemProps => renderMap({...itemProps, onPress: handlePress})}
+      renderItem={itemProps =>
+        renderMap({
+          ...itemProps,
+          onPress: handlePress,
+          match: props.reducer.match,
+        })
+      }
       keyExtractor={item => item.id.toString()}
       renderSectionHeader={({section: {title}}) => (
         <Text style={styles.containers.sectionHeading}>{title}</Text>

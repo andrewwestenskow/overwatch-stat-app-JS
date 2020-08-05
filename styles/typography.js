@@ -22,22 +22,22 @@ export default StyleSheet.create({
   unselected: {
     ...base,
     color: 'grey',
-    width: '80%',
+    width: '100%',
     fontSize: 48,
     textAlign: 'center',
   },
   victory: {
     ...base,
-    color: 'yellow',
+    color: '#ffb642',
     fontSize: 48,
-    width: '80%',
+    width: '100%',
     textAlign: 'center',
   },
   defeat: {
     ...base,
-    color: 'red',
+    color: '#fe0230',
     fontSize: 48,
-    width: '80%',
+    width: '100%',
     textAlign: 'center',
   },
 });
