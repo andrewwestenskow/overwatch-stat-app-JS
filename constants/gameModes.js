@@ -20,4 +20,7 @@ export const deriveGameMode = id => {
       return null;
   }
 };
+
+export const deriveIsControl = id => (id === 1 ? true : false);
+
 export default gameModes;

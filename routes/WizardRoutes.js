@@ -19,7 +19,7 @@ export default ({heroes, maps, reducer}) => {
         name="Maps"
       />
       <Stack.Screen
-        component={screenWrapper({heroes, reducer}, Heroes)}
+        component={screenWrapper({heroes, reducer, maps}, Heroes)}
         name="Heroes"
       />
     </Stack.Navigator>

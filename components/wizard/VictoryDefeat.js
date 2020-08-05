@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, Text} from 'react-native';
 import styles from '../../styles';
 
 const VictoryDefeat = props => {
@@ -21,7 +21,6 @@ const VictoryDefeat = props => {
   };
 
   useEffect(() => {
-    console.log(isVictory);
     props.reducer.dispatch({
       type: props.reducer.actions.UPDATE_WIN,
       payload: isVictory,

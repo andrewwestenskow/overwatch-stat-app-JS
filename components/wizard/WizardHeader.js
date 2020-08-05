@@ -18,8 +18,6 @@ const WizardHeader = props => {
     }
   });
 
-  console.log(map);
-
   return (
     <View style={styles.sectionHeader}>
       <Text>Match Summary: </Text>
@@ -51,7 +49,7 @@ const styles = StyleSheet.create({
   headerRowItem: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '50%',
   },
   headerRowImage: {

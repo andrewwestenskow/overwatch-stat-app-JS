@@ -25,11 +25,13 @@ export default (state, action) => {
     case UPDATE_PLAYER_ID:
       return {...state, player_id: payload};
     case UPDATE_MAP_ID:
-      return {...state, map_id: payload};
+      return {...state, map_id: payload, heroes: []};
     case ADD_HERO:
       return {...state, heroes: [...state.heroes, payload]};
     case REMOVE_HERO:
-      const index = state.heroes.findIndex(hero => hero.id === payload.id);
+      const index = state.heroes.findIndex(
+        hero => hero.hero_id === payload.hero_id,
+      );
       const copyArr = [...state.heroes];
       copyArr.splice(index, 1);
       return {...state, heroes: copyArr};
