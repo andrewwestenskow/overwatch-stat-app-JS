@@ -29,8 +29,6 @@ const ResultsWizard = props => {
     dispatch({type: actions.UPDATE_PLAYER_ID, payload: player.id});
   }, [player]);
 
-  console.log(match);
-
   return (
     <>
       <WizardRoutes

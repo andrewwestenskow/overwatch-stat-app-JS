@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
   SectionList,
   Text,
   StyleSheet,
   View,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {deriveHeroRole} from '../../constants/heroRoles';
@@ -12,29 +13,41 @@ import {ATTACK, DEFENSE, BOTH, CONTROL} from '../../constants/gameRounds';
 import {deriveIsControl} from '../../constants/gameModes';
 import styles from '../../styles';
 
-const SelectGameHero = ({action, item}) => {
+const SelectGameHero = ({action, item, selectedItem}) => {
   return (
     <View style={internalStyles.rightElement}>
-      <TouchableWithoutFeedback onPress={() => action(item.id, ATTACK)}>
+      <TouchableOpacity
+        style={internalStyles.gameRoundSelector}
+        onPress={() => action(item.id, ATTACK)}>
         <Text>A</Text>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => action(item.id, DEFENSE)}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={internalStyles.gameRoundSelector}
+        onPress={() => action(item.id, DEFENSE)}>
         <Text>D</Text>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => action(item.id, BOTH)}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={internalStyles.gameRoundSelector}
+        onPress={() => action(item.id, BOTH)}>
         <Text>B</Text>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const SelectControlHero = ({action, item}) => {
+const SelectControlHero = ({
+  action,
+  item,
+  inMatch,
+  selectedStyles,
+  stdStyles,
+}) => {
   return (
-    <TouchableWithoutFeedback
-      style={internalStyles.rightElement}
+    <TouchableOpacity
+      style={inMatch ? selectedStyles : stdStyles}
       onPress={() => action(item.id, CONTROL)}>
       <Text>Select</Text>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 
@@ -42,6 +55,22 @@ const renderMap = ({item, actions, heroes, isControl}) => {
   const inMatch = heroes.some(e => e.hero_id === item.id);
 
   const action = inMatch ? actions.removeHero : actions.addHero;
+
+  const stdStyles = {...internalStyles.rightElement};
+  const selectedStyles = {
+    ...internalStyles.rightElement,
+    ...internalStyles.selected,
+  };
+
+  const selectProps = {
+    item,
+    action,
+    heroes,
+    inMatch,
+    selectedItem: inMatch ? heroes.find(e => e.hero_id === item.id) : false,
+    stdStyles,
+    selectedStyles,
+  };
   return (
     <ListItem
       bottomDivider
@@ -54,9 +83,9 @@ const renderMap = ({item, actions, heroes, isControl}) => {
       }}
       rightElement={
         isControl ? (
-          <SelectControlHero item={item} action={action} heroes={heroes} />
+          <SelectControlHero {...selectProps} />
         ) : (
-          <SelectGameHero item={item} action={action} heroes={heroes} />
+          <SelectGameHero {...selectProps} />
         )
       }
       title={item.name}
@@ -67,17 +96,22 @@ const renderMap = ({item, actions, heroes, isControl}) => {
 const Heroes = props => {
   const {
     reducer: {dispatch, actions, match},
+    heroes,
   } = props;
-  const formatData = props.heroes.reduce((acc, hero) => {
-    const index = acc.findIndex(section => section.id === hero.role_id);
-    if (index === -1) {
-      const name = deriveHeroRole(hero.role_id);
-      acc.push({title: name, id: hero.role_id, data: [hero]});
-    } else {
-      acc[index].data.push(hero);
-    }
-    return acc;
-  }, []);
+  const formatData = useMemo(
+    () =>
+      heroes.reduce((acc, hero) => {
+        const index = acc.findIndex(section => section.id === hero.role_id);
+        if (index === -1) {
+          const name = deriveHeroRole(hero.role_id);
+          acc.push({title: name, id: hero.role_id, data: [hero]});
+        } else {
+          acc[index].data.push(hero);
+        }
+        return acc;
+      }, []),
+    [match, heroes],
+  );
 
   const addHero = (hero_id, game_round_id) => {
     dispatch({type: actions.ADD_HERO, payload: {hero_id, game_round_id}});
@@ -91,23 +125,28 @@ const Heroes = props => {
 
   const isControl = deriveIsControl(gameModeId);
 
+  console.log(match.heroes);
+
   return (
-    <SectionList
-      contentContainerStyle={styles.containers.listContainer}
-      sections={formatData}
-      renderItem={itemProps =>
-        renderMap({
-          ...itemProps,
-          isControl,
-          actions: {addHero, removeHero},
-          heroes: match.heroes,
-        })
-      }
-      keyExtractor={item => item.id.toString()}
-      renderSectionHeader={({section: {title}}) => (
-        <Text style={styles.containers.sectionHeading}>{title}</Text>
-      )}
-    />
+    <View style={{flex: 1}}>
+      <SectionList
+        initialNumToRender={8}
+        contentContainerStyle={styles.containers.listContainer}
+        sections={formatData}
+        renderItem={itemProps =>
+          renderMap({
+            ...itemProps,
+            isControl,
+            actions: {addHero, removeHero},
+            heroes: match.heroes,
+          })
+        }
+        keyExtractor={item => item.id.toString()}
+        renderSectionHeader={({section: {title}}) => (
+          <Text style={styles.containers.sectionHeading}>{title}</Text>
+        )}
+      />
+    </View>
   );
 };
 
@@ -120,5 +159,21 @@ const internalStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+
+  gameRoundSelector: {
+    height: '90%',
+    borderWidth: 1,
+    borderColor: 'black',
+    width: '33%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  selected: {
+    backgroundColor: 'gray',
   },
 });
