@@ -21,10 +21,7 @@ const VictoryDefeat = props => {
   };
 
   useEffect(() => {
-    props.reducer.dispatch({
-      type: props.reducer.actions.UPDATE_WIN,
-      payload: isVictory,
-    });
+    props.dispatch.setWin(isVictory);
   }, [isVictory]);
 
   return (

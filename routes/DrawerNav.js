@@ -5,6 +5,13 @@ import AddPlayerForm from '../components/dashboard/AddPlayerForm';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {DrawerActions} from '@react-navigation/native';
 import CustomDrawer from '../components/Drawer/Drawer';
+import MatchProvider from '../context/stores/match';
+
+const WizardWithContext = props => (
+  <MatchProvider>
+    <ResultsWizard {...props} />
+  </MatchProvider>
+);
 
 const Drawer = createDrawerNavigator();
 
@@ -39,7 +46,7 @@ export default props => {
       />
       <Drawer.Screen
         name="Add Match"
-        component={ResultsWizard}
+        component={WizardWithContext}
         initialParams={{...props.route.params}}
       />
       <Drawer.Screen

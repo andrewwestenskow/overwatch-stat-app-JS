@@ -2,18 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import VictoryDefeat from './VictoryDefeat';
 
-const WizardHeader = props => {
-  const {
-    reducer: {dispatch, actions, match},
-    maps,
-    heroes,
-  } = props;
-
+const WizardHeader = ({mapId, dispatch, maps, heroes}) => {
   const [map, setMap] = useState({});
 
   useEffect(() => {
-    if (match.map_id) {
-      const newMap = maps.find(e => e.id === match.map_id);
+    if (mapId) {
+      const newMap = maps.find(e => e.id === mapId);
       setMap(newMap);
     }
   });
@@ -21,9 +15,9 @@ const WizardHeader = props => {
   return (
     <View style={styles.sectionHeader}>
       <Text>Match Summary: </Text>
-      <VictoryDefeat reducer={{dispatch, actions}} />
+      <VictoryDefeat dispatch={dispatch} />
       <View style={styles.headerRow}>
-        {match.map_id && (
+        {mapId && (
           <View style={styles.headerRowItem}>
             <Text>Map: </Text>
             <Image style={styles.headerRowImage} source={{uri: map.image}} />
