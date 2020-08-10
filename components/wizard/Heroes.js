@@ -109,7 +109,7 @@ const Heroes = props => {
   );
 
   const isControl = useMemo(() => {
-    const gameModeId = props.maps.find(e => e.id === map_id).game_mode_id;
+    const gameModeId = props.maps.find(e => e.id === map_id)?.game_mode_id;
 
     return deriveIsControl(gameModeId);
   }, [map_id]);

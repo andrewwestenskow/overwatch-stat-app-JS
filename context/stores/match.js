@@ -22,7 +22,7 @@ const deriveHeroStatus = (arr, payload) => {
 const initialState = {
   player_id: null,
   map_id: null,
-  win: false,
+  win: null,
   heroes: [],
 };
 
@@ -54,6 +54,13 @@ export default props => {
     });
   };
 
+  const reset = () => {
+    setPlayer_id(initialState.player_id);
+    setMap_id(initialState.map_id);
+    setWin(initialState.win);
+    setHeroes(initialState.heroes);
+  };
+
   return (
     <MatchContext.Provider
       value={{
@@ -61,7 +68,14 @@ export default props => {
         map_id,
         win,
         heroes,
-        dispatch: {setPlayer_id, setMap_id, setWin, modifyHeroes, submitMatch},
+        dispatch: {
+          setPlayer_id,
+          setMap_id,
+          setWin,
+          modifyHeroes,
+          submitMatch,
+          reset,
+        },
       }}>
       {props.children}
     </MatchContext.Provider>

@@ -39,6 +39,7 @@ const ResultsWizard = props => {
         matchPlayer={player_id}
         matchWin={win}
         matchMap={map_id}
+        navigate={props.navigation.navigate}
       />
     </>
   );
