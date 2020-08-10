@@ -1,29 +1,77 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import UI from '../UI';
 import VictoryDefeat from './VictoryDefeat';
 
-const WizardHeader = ({mapId, dispatch, maps, heroes}) => {
+const WizardHeader = ({
+  matchMap,
+  dispatch,
+  maps,
+  heroes,
+  matchHeroes,
+  matchPlayer,
+  matchWin,
+}) => {
   const [map, setMap] = useState({});
 
   useEffect(() => {
-    if (mapId) {
-      const newMap = maps.find(e => e.id === mapId);
+    if (matchMap) {
+      const newMap = maps.find(e => e.id === matchMap);
       setMap(newMap);
     }
   });
+
+  const displayHeroes = useMemo(
+    () =>
+      matchHeroes.map(e => {
+        const hero = heroes.find(h => h.id === e.hero_id);
+        return hero;
+      }),
+    [heroes, matchHeroes],
+  );
+
+  const ready = useMemo(() =>
+    matchMap && matchHeroes.length && matchPlayer && matchWin ? true : false,
+  );
 
   return (
     <View style={styles.sectionHeader}>
       <Text>Match Summary: </Text>
       <VictoryDefeat dispatch={dispatch} />
       <View style={styles.headerRow}>
-        {mapId && (
+        {matchMap && (
           <View style={styles.headerRowItem}>
             <Text>Map: </Text>
-            <Image style={styles.headerRowImage} source={{uri: map.image}} />
+            <Image
+              resizeMethod="resize"
+              style={styles.headerRowImage}
+              source={{uri: map.image}}
+            />
           </View>
         )}
+        {displayHeroes.length ? (
+          <View style={styles.headerRowItem}>
+            <Text>Heroes: </Text>
+            {displayHeroes.map(e => (
+              <Image
+                resizeMethod="resize"
+                key={e.id}
+                source={{uri: e.image}}
+                style={{height: 25, width: 25, margin: 2}}
+              />
+            ))}
+          </View>
+        ) : null}
       </View>
+      {ready && (
+        <View style={styles.headerRow}>
+          <UI.Button
+            onPress={dispatch.submitMatch}
+            buttonStyle={{width: '95%'}}
+            title="Submit"
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -45,6 +93,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     width: '50%',
+    flexWrap: 'wrap',
+    height: '100%',
+    overflow: 'hidden',
   },
   headerRowImage: {
     height: 50,

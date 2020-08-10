@@ -18,18 +18,18 @@ const SelectGameHero = ({action, item, inMatch, selectedStyles, stdStyles}) => {
   return (
     <View style={internalStyles.rightElement}>
       <TouchableOpacity
-        style={inMatch?.game_mode_id === ATTACK ? selectedStyles : stdStyles}
-        onPress={() => action({hero_id: item.id, game_mode_id: ATTACK})}>
+        style={inMatch?.game_round_id === ATTACK ? selectedStyles : stdStyles}
+        onPress={() => action({hero_id: item.id, game_round_id: ATTACK})}>
         <Text>Attack</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={inMatch?.game_mode_id === DEFENSE ? selectedStyles : stdStyles}
-        onPress={() => action({hero_id: item.id, game_mode_id: DEFENSE})}>
+        style={inMatch?.game_round_id === DEFENSE ? selectedStyles : stdStyles}
+        onPress={() => action({hero_id: item.id, game_round_id: DEFENSE})}>
         <Text>Defense</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={inMatch?.game_mode_id === BOTH ? selectedStyles : stdStyles}
-        onPress={() => action({hero_id: item.id, game_mode_id: BOTH})}>
+        style={inMatch?.game_round_id === BOTH ? selectedStyles : stdStyles}
+        onPress={() => action({hero_id: item.id, game_round_id: BOTH})}>
         <Text>Both</Text>
       </TouchableOpacity>
     </View>
@@ -46,7 +46,7 @@ const SelectControlHero = ({
   return (
     <TouchableOpacity
       style={inMatch ? selectedStyles : stdStyles}
-      onPress={() => action({hero_id: item.id, game_mode_id: CONTROL})}>
+      onPress={() => action({hero_id: item.id, game_round_id: CONTROL})}>
       <Text>Select</Text>
     </TouchableOpacity>
   );
