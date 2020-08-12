@@ -12,12 +12,13 @@ const WizardHeader = ({
   matchPlayer,
   matchWin,
   navigate,
+  isSubmitting,
 }) => {
   const [map, setMap] = useState({});
 
   useEffect(() => {
     if (matchMap) {
-      const newMap = maps.find(e => e.id === matchMap);
+      const newMap = maps.find(e => e?.id === matchMap);
       setMap(newMap);
     }
   });
@@ -31,10 +32,10 @@ const WizardHeader = ({
     [heroes, matchHeroes],
   );
 
-  const ready = useMemo(() =>
-    matchMap && matchHeroes.length && matchPlayer && matchWin !== null
-      ? true
-      : false,
+  const ready = useMemo(
+    () =>
+      matchMap && matchHeroes.length && matchPlayer && matchWin ? true : false,
+    [matchMap, matchHeroes.length, matchPlayer, matchWin],
   );
 
   const handleSubmit = () => {
@@ -47,7 +48,7 @@ const WizardHeader = ({
   return (
     <View style={styles.sectionHeader}>
       <Text>Match Summary: </Text>
-      <VictoryDefeat dispatch={dispatch} />
+      <VictoryDefeat matchWin={matchWin} dispatch={dispatch} />
       <View style={styles.headerRow}>
         {matchMap && (
           <View style={styles.headerRowItem}>
@@ -76,6 +77,7 @@ const WizardHeader = ({
       {ready && (
         <View style={styles.headerRow}>
           <UI.Button
+            loading={isSubmitting}
             onPress={handleSubmit}
             buttonStyle={{width: '95%'}}
             title="Submit"

@@ -31,6 +31,7 @@ export default props => {
   const [map_id, setMap_id] = useState(initialState.map_id);
   const [win, setWin] = useState(initialState.win);
   const [heroes, setHeroes] = useState(initialState.heroes);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const modifyHeroes = payload => {
     const copy = [...heroes];
@@ -47,10 +48,13 @@ export default props => {
   };
 
   const submitMatch = () => {
+    setIsSubmitting(true);
     return httpRequest({
       method: 'POST',
       url: `/results/${player_id}`,
-      data: {player_id, map_id, win, heroes},
+      data: {player_id, map_id, win: win === 'win' ? true : false, heroes},
+    }).then(() => {
+      setIsSubmitting(false);
     });
   };
 
@@ -68,6 +72,7 @@ export default props => {
         map_id,
         win,
         heroes,
+        isSubmitting,
         dispatch: {
           setPlayer_id,
           setMap_id,

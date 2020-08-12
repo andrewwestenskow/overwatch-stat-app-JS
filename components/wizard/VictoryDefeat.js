@@ -3,26 +3,34 @@ import {View, TouchableOpacity, Text} from 'react-native';
 import styles from '../../styles';
 
 const VictoryDefeat = props => {
+  const {dispatch, matchWin} = props;
   const [isSelected, setIsSelected] = useState(false);
   const [isVictory, setIsVictory] = useState(false);
 
   const handleVictory = () => {
-    setIsVictory(true);
+    setIsVictory('win');
     if (!isSelected) {
       setIsSelected(true);
     }
   };
 
   const handleDefeat = () => {
-    setIsVictory(false);
+    setIsVictory('lose');
     if (!isSelected) {
       setIsSelected(true);
     }
   };
 
   useEffect(() => {
-    props.dispatch.setWin(isVictory);
+    dispatch.setWin(isVictory);
   }, [isVictory]);
+
+  useEffect(() => {
+    if (!matchWin) {
+      setIsSelected(false);
+      setIsVictory(false);
+    }
+  }, [matchWin]);
 
   return (
     <View style={styles.containers.fixedFooter}>
@@ -30,7 +38,7 @@ const VictoryDefeat = props => {
         <Text
           onPress={handleDefeat}
           style={
-            isSelected && !isVictory
+            isSelected && isVictory === 'lose'
               ? styles.typography.defeat
               : styles.typography.unselected
           }>
@@ -41,7 +49,7 @@ const VictoryDefeat = props => {
         <Text
           onPress={handleVictory}
           style={
-            isSelected && isVictory
+            isSelected && isVictory === 'win'
               ? styles.typography.victory
               : styles.typography.unselected
           }>

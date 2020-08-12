@@ -7,9 +7,14 @@ import httpRequest from '../../utils/httpRequest';
 
 const ResultsWizard = props => {
   const {player} = useContext(PlayersContext);
-  const {dispatch, map_id, heroes: matchHeroes, player_id, win} = useContext(
-    MatchContext,
-  );
+  const {
+    dispatch,
+    map_id,
+    heroes: matchHeroes,
+    player_id,
+    win,
+    isSubmitting,
+  } = useContext(MatchContext);
 
   const [availableMaps, setAvailableMaps] = useState([]);
   const [availableHeroes, setAvailableHeroes] = useState([]);
@@ -40,6 +45,7 @@ const ResultsWizard = props => {
         matchWin={win}
         matchMap={map_id}
         navigate={props.navigation.navigate}
+        isSubmitting={isSubmitting}
       />
     </>
   );
