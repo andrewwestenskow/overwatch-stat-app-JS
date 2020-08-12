@@ -37,6 +37,7 @@ export default props => {
       drawerContent={newProps => (
         <CustomDrawer {...newProps} authNavigate={props.authNavigate} />
       )}
+      screenOptions={{unmountOnBlur: true}}
       drawerType="front"
       initialRouteName="Results">
       <Drawer.Screen
