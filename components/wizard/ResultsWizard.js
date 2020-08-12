@@ -6,7 +6,6 @@ import {PlayersContext} from '../../context/stores/players';
 import httpRequest from '../../utils/httpRequest';
 
 const ResultsWizard = props => {
-  const {player} = useContext(PlayersContext);
   const {
     dispatch,
     map_id,
@@ -28,10 +27,6 @@ const ResultsWizard = props => {
     }
     fetchData();
   }, []);
-
-  useEffect(() => {
-    dispatch.setPlayer_id(player.id);
-  }, [player]);
 
   return (
     <>

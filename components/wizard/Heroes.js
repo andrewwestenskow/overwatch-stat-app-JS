@@ -1,4 +1,4 @@
-import React, {useMemo, useContext} from 'react';
+import React, {useMemo, useContext, useEffect} from 'react';
 import {
   SectionList,
   Text,
@@ -93,6 +93,7 @@ const renderMap = ({item, modifyHeroes, matchHeroes, isControl}) => {
 const Heroes = props => {
   const {heroes} = props;
   const {dispatch, heroes: matchHeroes, map_id} = useContext(MatchContext);
+
   const formatData = useMemo(
     () =>
       heroes.reduce((acc, hero) => {

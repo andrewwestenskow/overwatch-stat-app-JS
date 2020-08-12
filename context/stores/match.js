@@ -1,4 +1,5 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useState, useContext, useEffect} from 'react';
+import {PlayersContext} from './players';
 import httpRequest from '../../utils/httpRequest';
 
 const MatchContext = createContext();
@@ -19,19 +20,27 @@ const deriveHeroStatus = (arr, payload) => {
   }
 };
 
-const initialState = {
-  player_id: null,
-  map_id: null,
-  win: null,
-  heroes: [],
-};
-
 export default props => {
+  const {
+    player: {id: ctxPlayerId},
+  } = useContext(PlayersContext);
+
+  const initialState = {
+    player_id: ctxPlayerId,
+    map_id: null,
+    win: null,
+    heroes: [],
+  };
+
   const [player_id, setPlayer_id] = useState(initialState.player_id);
   const [map_id, setMap_id] = useState(initialState.map_id);
   const [win, setWin] = useState(initialState.win);
   const [heroes, setHeroes] = useState(initialState.heroes);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    setPlayer_id(ctxPlayerId);
+  }, [ctxPlayerId]);
 
   const modifyHeroes = payload => {
     const copy = [...heroes];

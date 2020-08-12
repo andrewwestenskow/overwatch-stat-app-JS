@@ -7,19 +7,16 @@ const Stack = createStackNavigator();
 
 //* Renders results wizard
 
-export default ({heroes, maps, reducer}) => {
+export default ({heroes, maps}) => {
   return (
     <Stack.Navigator
       screenOptions={{
         ...TransitionPresets.SlideFromRightIOS,
       }}
       initialRouteName="Maps">
+      <Stack.Screen component={screenWrapper({maps}, Maps)} name="Maps" />
       <Stack.Screen
-        component={screenWrapper({maps, reducer}, Maps)}
-        name="Maps"
-      />
-      <Stack.Screen
-        component={screenWrapper({heroes, reducer, maps}, Heroes)}
+        component={screenWrapper({heroes, maps}, Heroes)}
         name="Heroes"
       />
     </Stack.Navigator>
