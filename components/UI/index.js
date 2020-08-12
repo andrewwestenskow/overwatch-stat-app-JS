@@ -3,4 +3,13 @@ import Input from './Input';
 import FormWrapper from './FormWrapper';
 import Select, {Option} from './Select';
 import SectionSwipe from './SectionSwipe';
-export default {Button, Input, FormWrapper, Select, Option, SectionSwipe};
+import Progress from './Progress';
+export default {
+  Button,
+  Input,
+  FormWrapper,
+  Select,
+  Option,
+  SectionSwipe,
+  Progress,
+};

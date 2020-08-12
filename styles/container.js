@@ -39,4 +39,10 @@ export default StyleSheet.create({
     height: 50,
   },
   sectionHeading: {padding: 15, fontSize: 24},
+  row: {
+    flexDirection: 'row',
+    padding: 10,
+    justifyContent: 'space-around',
+    width: '100%',
+  },
 });
