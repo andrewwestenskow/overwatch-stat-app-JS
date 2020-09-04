@@ -4,6 +4,8 @@ import FormWrapper from './FormWrapper';
 import Select, {Option} from './Select';
 import SectionSwipe from './SectionSwipe';
 import Progress from './Progress';
+import Heading from './Heading';
+import CenterButton from './CenterButton';
 export default {
   Button,
   Input,
@@ -12,4 +14,6 @@ export default {
   Option,
   SectionSwipe,
   Progress,
+  Heading,
+  CenterButton,
 };

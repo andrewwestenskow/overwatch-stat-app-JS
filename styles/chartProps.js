@@ -10,6 +10,7 @@ export default {
       width: 10,
       style: {transform: [{scaleX: -1}]},
       rotation: 360,
+      backgroundColor: 'rgb(215,211,212, 0.15)',
     },
   },
 };

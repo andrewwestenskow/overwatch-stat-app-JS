@@ -5,9 +5,7 @@ import SafeView from '../../hocs/SafeView';
 import styles from '../../styles';
 import httpRequest from '../../utils/httpRequest';
 import UI from '../UI';
-import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import getTopAndBottom from '../../utils/getTopAndBottom';
-import chartProps from '../../styles/chartProps';
 
 const Results = props => {
   const {player} = useContext(PlayersContext);
@@ -31,9 +29,39 @@ const Results = props => {
     <Text>Loading...</Text>
   ) : (
     <View style={styles.containers.window}>
+      <UI.Heading
+        title="Best & Worst Heroes"
+        subheading="All roles. > 5 matches played"
+      />
+      <UI.CenterButton title="See all hero data" />
       <View style={styles.containers.row}>
-        <UI.Progress fill={heroData.top.win_rate} />
-        <UI.Progress fill={heroData.bottom.win_rate} />
+        <UI.Progress
+          fill={heroData.top.win_rate}
+          label={heroData.top.name}
+          image={heroData.top.image}
+        />
+        <UI.Progress
+          fill={heroData.bottom.win_rate}
+          label={heroData.bottom.name}
+          image={heroData.bottom.image}
+        />
+      </View>
+      <UI.Heading
+        title="Best & Worst Maps"
+        subheading="All game modes.  > 1 matches played"
+      />
+      <UI.CenterButton title="See all map data" />
+      <View style={styles.containers.row}>
+        <UI.Progress
+          fill={mapData.top.win_rate}
+          label={mapData.top.name}
+          image={mapData.top.image}
+        />
+        <UI.Progress
+          fill={mapData.bottom.win_rate}
+          label={mapData.bottom.name}
+          image={mapData.bottom.image}
+        />
       </View>
     </View>
   );

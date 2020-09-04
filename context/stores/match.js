@@ -3,7 +3,7 @@ import {PlayersContext} from './players';
 import httpRequest from '../../utils/httpRequest';
 
 const MatchContext = createContext();
-MatchContext.displayName = 'PlayersStore';
+MatchContext.displayName = 'MatchStore';
 
 const deriveHeroStatus = (arr, payload) => {
   const index = arr.findIndex(e => e.hero_id === payload.hero_id);

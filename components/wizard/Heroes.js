@@ -13,6 +13,7 @@ import {deriveHeroRole} from '../../constants/heroRoles';
 import {ATTACK, DEFENSE, BOTH, CONTROL} from '../../constants/gameRounds';
 import {deriveIsControl} from '../../constants/gameModes';
 import styles from '../../styles';
+import useTraceUpdate from '../../utils/useTraceUpdate';
 
 const SelectGameHero = ({action, item, inMatch, selectedStyles, stdStyles}) => {
   return (
@@ -106,7 +107,7 @@ const Heroes = props => {
         }
         return acc;
       }, []),
-    [match, heroes],
+    [heroes],
   );
 
   const isControl = useMemo(() => {
