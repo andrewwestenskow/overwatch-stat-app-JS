@@ -1,5 +1,6 @@
 import React, {useEffect, useContext} from 'react';
 import {PlayersContext} from '../context/stores/players';
+import {GameDataContext} from '../context/stores/gameData';
 import {View, Text} from 'react-native';
 import SafeView from '../hocs/SafeView';
 import containers from '../styles/container';
@@ -9,17 +10,14 @@ import httpRequest from '../utils/httpRequest';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Landing = ({navigation}) => {
-  const {setPlayers, setPlayer} = useContext(PlayersContext);
-
-  const getPlayers = async () => {
-    const res = await httpRequest({method: 'GET', url: '/players'});
-    return res;
-  };
+  const {setPlayers, getPlayers, setPlayer} = useContext(PlayersContext);
+  const {getGameData} = useContext(GameDataContext);
 
   useEffect(() => {
     httpRequest({method: 'GET', url: '/auth'})
       .then(async res => {
         await AsyncStorage.setItem('token', res.token);
+        await getGameData();
         getPlayers().then(players => {
           setPlayers(players);
           if (players[0]) {

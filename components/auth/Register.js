@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {PlayersContext} from '../../context/stores/players';
+import {GameDataContext} from '../../context/stores/gameData';
 import {View, Text} from 'react-native';
 import UI from '../UI';
 import SafeView from '../../hocs/SafeView';
@@ -11,6 +12,7 @@ import validateValues from '../../utils/validateValues';
 
 const Register = ({navigation}) => {
   const {setPlayer, setPlayers, getPlayers} = useContext(PlayersContext);
+  const {getGameData} = useContext(GameDataContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,6 +37,7 @@ const Register = ({navigation}) => {
       data: {email, password, name, platform_id: platform},
     }).then(async res => {
       await AsyncStorage.setItem('token', res.token);
+      await getGameData();
       getPlayers().then(players => {
         setPlayers(players);
         if (players[0]) {

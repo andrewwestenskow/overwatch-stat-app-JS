@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {MatchContext} from '../../context/stores/match';
+import {GameDataContext} from '../../context/stores/gameData';
 import WizardRoutes from '../../routes/WizardRoutes';
 import WizardHeader from './WizardHeader';
 import {PlayersContext} from '../../context/stores/players';
@@ -15,26 +16,15 @@ const ResultsWizard = props => {
     isSubmitting,
   } = useContext(MatchContext);
 
-  const [availableMaps, setAvailableMaps] = useState([]);
-  const [availableHeroes, setAvailableHeroes] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const maps = await httpRequest({method: 'GET', url: '/maps'});
-      const heroes = await httpRequest({method: 'GET', url: '/heroes'});
-      setAvailableHeroes(heroes);
-      setAvailableMaps(maps);
-    }
-    fetchData();
-  }, []);
+  const {maps, heroes} = useContext(GameDataContext);
 
   return (
     <>
-      <WizardRoutes heroes={availableHeroes} maps={availableMaps} />
+      <WizardRoutes heroes={heroes} maps={maps} />
       <WizardHeader
         dispatch={dispatch}
-        maps={availableMaps}
-        heroes={availableHeroes}
+        maps={maps}
+        heroes={heroes}
         matchHeroes={matchHeroes}
         matchPlayer={player_id}
         matchWin={win}

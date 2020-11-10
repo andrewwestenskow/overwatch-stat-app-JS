@@ -2,6 +2,7 @@ import React, {createRef} from 'react';
 import Results from '../components/Results/Results';
 import ResultsWizard from '../components/wizard/ResultsWizard';
 import AddPlayerForm from '../components/dashboard/AddPlayerForm';
+import AllHeroes from '../components/Results/AllHeroes';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {DrawerActions} from '@react-navigation/native';
 import CustomDrawer from '../components/Drawer/Drawer';
@@ -53,6 +54,11 @@ export default props => {
       <Drawer.Screen
         name="Add Player"
         component={AddPlayerForm}
+        initialParams={{...props.route.params}}
+      />
+      <Drawer.Screen
+        name="All Heroes"
+        component={AllHeroes}
         initialParams={{...props.route.params}}
       />
     </Drawer.Navigator>

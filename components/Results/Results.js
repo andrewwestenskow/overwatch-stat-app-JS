@@ -33,7 +33,10 @@ const Results = props => {
         title="Best & Worst Heroes"
         subheading="All roles. > 5 matches played"
       />
-      <UI.CenterButton title="See all hero data" />
+      <UI.CenterButton
+        onPress={() => props.navigation.navigate('All Heroes')}
+        title="See all hero data"
+      />
       <View style={styles.containers.row}>
         <UI.Progress
           fill={heroData.top.win_rate}

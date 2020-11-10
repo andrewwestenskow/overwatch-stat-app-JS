@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react';
 import {PlayersContext} from '../../context/stores/players';
+import {GameDataContext} from '../../context/stores/gameData';
 import {View, Text} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import UI from '../UI';
@@ -14,12 +15,14 @@ const Login = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const {setPlayer, setPlayers, getPlayers} = useContext(PlayersContext);
+  const {getGameData} = useContext(GameDataContext);
 
   const handleLogin = () => {
     setIsLoading(true);
     httpRequest({method: 'POST', data: {email, password}, url: '/auth/login'})
       .then(async res => {
         await AsyncStorage.setItem('token', res.token);
+        await getGameData();
         getPlayers().then(players => {
           setPlayers(players);
           if (players[0]) {
