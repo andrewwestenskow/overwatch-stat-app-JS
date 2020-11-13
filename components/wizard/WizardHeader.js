@@ -1,19 +1,20 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useMemo, useContext} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import UI from '../UI';
 import VictoryDefeat from './VictoryDefeat';
+import MatchProvider, {MatchContext} from '../../context/stores/match';
+import withContext from '../../context/withContext';
 
-const WizardHeader = ({
-  matchMap,
-  dispatch,
-  maps,
-  heroes,
-  matchHeroes,
-  matchPlayer,
-  matchWin,
-  navigate,
-  isSubmitting,
-}) => {
+const WizardHeader = ({maps, heroes, navigate}) => {
+  const {
+    dispatch,
+    map_id: matchMap,
+    heroes: matchHeroes,
+    player_id: matchPlayer,
+    win: matchWin,
+    isSubmitting,
+  } = useContext(MatchContext);
+
   const [map, setMap] = useState({});
 
   useEffect(() => {
@@ -88,7 +89,7 @@ const WizardHeader = ({
   );
 };
 
-export default WizardHeader;
+export default withContext(WizardHeader, MatchProvider);
 
 const styles = StyleSheet.create({
   sectionHeader: {

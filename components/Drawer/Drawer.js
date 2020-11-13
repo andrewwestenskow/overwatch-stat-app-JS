@@ -1,23 +1,24 @@
 import React, {useContext} from 'react';
 import {PlayersContext} from '../../context/stores/players';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-import {ListItem} from 'react-native-elements';
+import {ListItem, Avatar} from 'react-native-elements';
 import httpRequest from '../../utils/httpRequest';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const renderPlayer = ({item, onPress}) => {
   return (
-    <ListItem
-      onPress={() => onPress(item)}
-      title={item.name}
-      leftAvatar={{
-        source: item.portrait && {uri: item.portrait},
-        title: item.name[0],
-        overlayContainerStyle: {backgroundColor: 'grey'},
-      }}
-      bottomDivider
-      chevron
-    />
+    <ListItem onPress={() => onPress(item)} bottomDivider>
+      <Avatar
+        source={{uri: item.portrait}}
+        title={item.name[0]}
+        overlayContainerStyle={{backgroundColor: 'grey'}}
+        rounded={true}
+      />
+      <ListItem.Content>
+        <ListItem.Title>{item.name}</ListItem.Title>
+      </ListItem.Content>
+      <ListItem.Chevron />
+    </ListItem>
   );
 };
 

@@ -6,13 +6,6 @@ import AllHeroes from '../components/Results/AllHeroes';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {DrawerActions} from '@react-navigation/native';
 import CustomDrawer from '../components/Drawer/Drawer';
-import MatchProvider from '../context/stores/match';
-
-const WizardWithContext = props => (
-  <MatchProvider>
-    <ResultsWizard {...props} />
-  </MatchProvider>
-);
 
 const Drawer = createDrawerNavigator();
 
@@ -38,7 +31,7 @@ export default props => {
       drawerContent={newProps => (
         <CustomDrawer {...newProps} authNavigate={props.authNavigate} />
       )}
-      screenOptions={{unmountOnBlur: true}}
+      screenOptions={{unmountOnBlur: true, header: () => null}}
       drawerType="front"
       initialRouteName="Results">
       <Drawer.Screen
@@ -48,7 +41,7 @@ export default props => {
       />
       <Drawer.Screen
         name="Add Match"
-        component={WizardWithContext}
+        component={ResultsWizard}
         initialParams={{...props.route.params}}
       />
       <Drawer.Screen

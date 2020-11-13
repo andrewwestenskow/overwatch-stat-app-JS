@@ -3,6 +3,7 @@ import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import Maps from '../components/wizard/Maps';
 import Heroes from '../components/wizard/Heroes';
 import screenWrapper from './ScreenWrapper';
+import MatchProvider from '../context/stores/match';
 const Stack = createStackNavigator();
 
 //* Renders results wizard

@@ -1,27 +1,26 @@
 import React, {useContext} from 'react';
-import {MatchContext} from '../../context/stores/match';
+import MatchProvider, {MatchContext} from '../../context/stores/match';
+import withContext from '../../context/withContext';
 import {SectionList} from 'react-native';
-import {ListItem} from 'react-native-elements';
+import {ListItem, Avatar} from 'react-native-elements';
 import {deriveGameMode} from '../../constants/gameModes';
 import {Text, StyleSheet} from 'react-native';
 import styles from '../../styles';
 
 const renderMap = ({item, onPress, mapId}) => {
   return (
-    <ListItem
-      bottomDivider
-      chevron
-      onPress={() => onPress(item.id)}
-      leftAvatar={{
-        source: {uri: item.image},
-        rounded: false,
-        imageProps: {
-          resizeMethod: 'resize',
-        },
-      }}
-      rightIcon={mapId === item.id ? {name: 'check', color: 'green'} : null}
-      title={item.name}
-    />
+    <ListItem bottomDivider onPress={() => onPress(item.id)}>
+      <Avatar
+        source={{uri: item.image}}
+        title={item.name[0]}
+        overlayContainerStyle={{backgroundColor: 'grey'}}
+        rounded={false}
+        imageProps={{resizeMethod: 'resize'}}
+      />
+      <ListItem.Content>
+        <ListItem.Title>{item.name}</ListItem.Title>
+      </ListItem.Content>
+    </ListItem>
   );
 };
 
@@ -65,4 +64,4 @@ const Maps = props => {
   );
 };
 
-export default Maps;
+export default withContext(Maps, MatchProvider);

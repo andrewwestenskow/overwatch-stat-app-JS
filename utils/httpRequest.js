@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export default async ({method, url, data}) => {
   //TODO Replace this later
-  const fullUrl = 'http://192.168.7.249:3050/api' + url;
+  const fullUrl = 'http://10.0.0.23:3050/api' + url;
   const authToken = await AsyncStorage.getItem('token');
   return new Promise((resolve, reject) => {
     axios({

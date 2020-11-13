@@ -1,57 +1,12 @@
-import React, {useMemo, useContext, useEffect} from 'react';
-import {
-  SectionList,
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import match, {MatchContext} from '../../context/stores/match';
-import {ListItem} from 'react-native-elements';
+import React, {useMemo, useContext} from 'react';
+import {SectionList, Text, StyleSheet, View} from 'react-native';
+import MatchProvider, {MatchContext} from '../../context/stores/match';
+import withContext from '../../context/withContext';
+import {ListItem, Avatar} from 'react-native-elements';
 import {deriveHeroRole} from '../../constants/heroRoles';
-import {ATTACK, DEFENSE, BOTH, CONTROL} from '../../constants/gameRounds';
 import {deriveIsControl} from '../../constants/gameModes';
+import {SelectGameHero, SelectControlHero} from './HeroSelection';
 import styles from '../../styles';
-import useTraceUpdate from '../../utils/useTraceUpdate';
-
-const SelectGameHero = ({action, item, inMatch, selectedStyles, stdStyles}) => {
-  return (
-    <View style={internalStyles.rightElement}>
-      <TouchableOpacity
-        style={inMatch?.game_round_id === ATTACK ? selectedStyles : stdStyles}
-        onPress={() => action({hero_id: item.id, game_round_id: ATTACK})}>
-        <Text>Attack</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={inMatch?.game_round_id === DEFENSE ? selectedStyles : stdStyles}
-        onPress={() => action({hero_id: item.id, game_round_id: DEFENSE})}>
-        <Text>Defense</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={inMatch?.game_round_id === BOTH ? selectedStyles : stdStyles}
-        onPress={() => action({hero_id: item.id, game_round_id: BOTH})}>
-        <Text>Both</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const SelectControlHero = ({
-  action,
-  item,
-  inMatch,
-  selectedStyles,
-  stdStyles,
-}) => {
-  return (
-    <TouchableOpacity
-      style={inMatch ? selectedStyles : stdStyles}
-      onPress={() => action({hero_id: item.id, game_round_id: CONTROL})}>
-      <Text>Select</Text>
-    </TouchableOpacity>
-  );
-};
 
 const renderMap = ({item, modifyHeroes, matchHeroes, isControl}) => {
   const inMatch = matchHeroes.find(e => e.hero_id === item.id);
@@ -70,30 +25,35 @@ const renderMap = ({item, modifyHeroes, matchHeroes, isControl}) => {
     selectedStyles,
   };
   return (
-    <ListItem
-      bottomDivider
-      leftAvatar={{
-        source: {uri: item.image},
-        rounded: false,
-        imageProps: {
-          resizeMethod: 'resize',
-        },
-      }}
-      rightElement={
-        isControl ? (
+    <ListItem bottomDivider>
+      <Avatar
+        source={{uri: item.image}}
+        title={item.name[0]}
+        overlayContainerStyle={{backgroundColor: 'grey'}}
+      />
+      <ListItem.Content
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <ListItem.Title>{item.name}</ListItem.Title>
+        {isControl ? (
           <SelectControlHero {...selectProps} />
         ) : (
           <SelectGameHero {...selectProps} />
-        )
-      }
-      title={item.name}
-    />
+        )}
+      </ListItem.Content>
+    </ListItem>
   );
 };
 
 const Heroes = props => {
   const {heroes} = props;
-  const {dispatch, heroes: matchHeroes, map_id} = useContext(MatchContext);
+  const match = useContext(MatchContext);
+
+  const {heroes: matchHeroes, map_id, dispatch} = match;
 
   const formatData = useMemo(
     () =>
@@ -140,25 +100,19 @@ const Heroes = props => {
   );
 };
 
-export default Heroes;
+export default withContext(Heroes, MatchProvider);
 
 const internalStyles = StyleSheet.create({
-  rightElement: {
-    width: '50%',
-    height: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-
   gameRoundSelector: {
     height: '90%',
-    width: '33%',
+    // width: '33%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'gray',
+    padding: 5,
+    margin: 5,
   },
 
   selected: {
