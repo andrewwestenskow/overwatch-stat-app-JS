@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import MatchProvider, {MatchContext} from '../../context/stores/match';
-import withContext from '../../context/withContext';
+import {MatchContext} from '../../context/stores/match';
+
 import {SectionList} from 'react-native';
 import {ListItem, Avatar} from 'react-native-elements';
 import {deriveGameMode} from '../../constants/gameModes';
@@ -64,4 +64,4 @@ const Maps = props => {
   );
 };
 
-export default withContext(Maps, MatchProvider);
+export default Maps;

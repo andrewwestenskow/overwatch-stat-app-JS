@@ -1,9 +1,8 @@
 import React, {useState, useEffect, useMemo, useContext} from 'react';
+import {MatchContext} from '../../context/stores/match';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import UI from '../UI';
 import VictoryDefeat from './VictoryDefeat';
-import MatchProvider, {MatchContext} from '../../context/stores/match';
-import withContext from '../../context/withContext';
 
 const WizardHeader = ({maps, heroes, navigate}) => {
   const {
@@ -89,7 +88,7 @@ const WizardHeader = ({maps, heroes, navigate}) => {
   );
 };
 
-export default withContext(WizardHeader, MatchProvider);
+export default WizardHeader;
 
 const styles = StyleSheet.create({
   sectionHeader: {

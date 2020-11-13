@@ -1,7 +1,6 @@
 import React, {useMemo, useContext} from 'react';
 import {SectionList, Text, StyleSheet, View} from 'react-native';
-import MatchProvider, {MatchContext} from '../../context/stores/match';
-import withContext from '../../context/withContext';
+import {MatchContext} from '../../context/stores/match';
 import {ListItem, Avatar} from 'react-native-elements';
 import {deriveHeroRole} from '../../constants/heroRoles';
 import {deriveIsControl} from '../../constants/gameModes';
@@ -100,7 +99,7 @@ const Heroes = props => {
   );
 };
 
-export default withContext(Heroes, MatchProvider);
+export default Heroes;
 
 const internalStyles = StyleSheet.create({
   gameRoundSelector: {

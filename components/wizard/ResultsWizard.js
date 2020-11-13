@@ -1,10 +1,9 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {MatchContext} from '../../context/stores/match';
+import React, {useContext} from 'react';
+import MatchProvider from '../../context/stores/match';
+import withContext from '../../context/withContext';
 import {GameDataContext} from '../../context/stores/gameData';
 import WizardRoutes from '../../routes/WizardRoutes';
 import WizardHeader from './WizardHeader';
-import {PlayersContext} from '../../context/stores/players';
-import httpRequest from '../../utils/httpRequest';
 
 const ResultsWizard = props => {
   const {maps, heroes} = useContext(GameDataContext);
@@ -21,4 +20,4 @@ const ResultsWizard = props => {
   );
 };
 
-export default ResultsWizard;
+export default withContext(ResultsWizard, MatchProvider);
