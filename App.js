@@ -12,6 +12,7 @@ import AuthRoutes from './routes/AuthRoutes';
 import {drawerRef} from './routes/DrawerNav';
 import PlayersProvider from './context/stores/players';
 import GameDataProvider from './context/stores/gameData';
+import Toast from 'react-native-toast-message';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <PlayersProvider>
         <NavigationContainer ref={drawerRef}>
           <AuthRoutes />
+          <Toast ref={ref => Toast.setRef(ref)} />
         </NavigationContainer>
       </PlayersProvider>
     </GameDataProvider>

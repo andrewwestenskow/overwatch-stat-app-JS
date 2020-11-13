@@ -28,6 +28,7 @@
     "react-native-screens": "^2.9.0",
     "react-native-svg": "^12.1.0",
     "react-native-swipe-gestures": "^1.0.5",
+    "react-native-toast-message": "^1.3.4",
     "react-native-vector-icons": "^7.0.0"
   },
   "devDependencies": {

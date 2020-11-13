@@ -14,7 +14,6 @@ const AllHeroes = props => {
   useEffect(() => {
     httpRequest({method: 'GET', url: `/results/${player.id}/heroes`}).then(
       data => {
-        console.log(data);
         setResults(data);
       },
     );
