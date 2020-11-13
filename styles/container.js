@@ -7,7 +7,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingBottom: 120,
+    paddingBottom: 175,
     minHeight: windowHeight,
     width: windowWidth,
     backgroundColor: '#425583',
@@ -44,5 +44,18 @@ export default StyleSheet.create({
     padding: 10,
     justifyContent: 'space-around',
     width: '100%',
+  },
+  preview: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  previewDetailHold: {
+    position: 'relative',
+    flex: 1,
+    height: '100%',
+    display: 'flex',
+    borderWidth: 1,
+    borderColor: 'black',
+    paddingLeft: 10,
   },
 });

@@ -14,6 +14,14 @@ export default StyleSheet.create({
     color: '#fff',
     marginLeft: windowWidth * 0.05,
   },
+  mainText: {
+    color: '#fff',
+    fontSize: 18,
+  },
+  subHead: {
+    color: '#fff',
+    fontSize: 14,
+  },
   imageLabel: {
     ...base,
     textAlign: 'center',

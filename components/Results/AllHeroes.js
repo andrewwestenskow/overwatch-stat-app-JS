@@ -1,9 +1,10 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {PlayersContext} from '../../context/stores/players';
-import {View, Text} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 import SafeView from '../../hocs/SafeView';
 import styles from '../../styles';
 import httpRequest from '../../utils/httpRequest';
+import ResultPreview from './ResultPreview';
 import UI from '../UI';
 
 const AllHeroes = props => {
@@ -17,11 +18,17 @@ const AllHeroes = props => {
         setResults(data);
       },
     );
-  });
+  }, [player.id]);
   return (
-    <View>
-      <Text>Yoooo</Text>
-    </View>
+    <ScrollView
+      contentContainerStyle={{
+        ...styles.containers.container,
+        padding: 5,
+      }}>
+      {results.map(hero => (
+        <ResultPreview key={hero.id} data={hero} />
+      ))}
+    </ScrollView>
   );
 };
 
