@@ -24,8 +24,13 @@ const AllHeroes = props => {
         ...styles.containers.container,
         padding: 5,
       }}>
+      <Text style={styles.typography.heading}>All Heroes</Text>
       {results.map(hero => (
-        <ResultPreview key={hero.id} data={hero} />
+        <ResultPreview
+          key={hero.id}
+          data={hero}
+          navigation={props.navigation}
+        />
       ))}
     </ScrollView>
   );

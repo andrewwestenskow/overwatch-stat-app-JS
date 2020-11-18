@@ -3,12 +3,14 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import notify from '../../utils/notify';
 import style from '../../styles';
 
-const ResultPreview = ({data}) => {
+const ResultPreview = ({data, navigation}) => {
   return (
     <TouchableOpacity
       style={style.containers.preview}
       onPress={
-        data.games_played ? null : () => notify({message: 'No data available'})
+        data.games_played
+          ? () => navigation.navigate('Individual Hero')
+          : () => notify({message: 'No data available'})
       }>
       <Image
         source={{uri: data.image}}
