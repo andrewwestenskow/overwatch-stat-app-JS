@@ -13,20 +13,29 @@ const Results = props => {
   const [heroData, setHeroData] = useState({top: {}, bottom: {}});
   const [mapData, setMapData] = useState({top: {}, bottom: {}});
   const [isLoading, setIsLoading] = useState(true);
+  const [isDataValid, setIsDataValid] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     httpRequest({method: 'GET', url: `/results/${player.id}`}).then(res => {
       const {heroResults, mapResults} = res;
 
-      getTopAndBottom(heroResults, setHeroData);
-      getTopAndBottom(mapResults, setMapData);
+      if (heroResults.length && mapResults.length) {
+        setIsDataValid(true);
+        console.log(heroResults);
+
+        getTopAndBottom(heroResults, setHeroData);
+        getTopAndBottom(mapResults, setMapData);
+      }
+
       setIsLoading(false);
     });
   }, []);
 
   return isLoading ? (
     <Text>Loading...</Text>
+  ) : !isDataValid ? (
+    <Text>No data, record some matches to get started</Text>
   ) : (
     <View style={styles.containers.window}>
       <UI.Heading
