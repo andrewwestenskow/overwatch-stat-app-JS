@@ -22,7 +22,6 @@ const Results = props => {
 
       if (heroResults.length && mapResults.length) {
         setIsDataValid(true);
-        console.log(heroResults);
 
         getTopAndBottom(heroResults, setHeroData);
         getTopAndBottom(mapResults, setMapData);

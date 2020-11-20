@@ -1,39 +1,51 @@
-import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {Fragment} from 'react';
+import {View, Text, Image} from 'react-native';
+import * as Progress from 'react-native-progress';
 import notify from '../../utils/notify';
 import style from '../../styles';
+import UI from '../UI';
 
-const ResultPreview = ({data, navigation}) => {
+const renderClosed = props => {
+  const {data} = props;
+
   return (
-    <TouchableOpacity
-      style={style.containers.preview}
-      onPress={
-        data.games_played
-          ? () => navigation.navigate('Individual Hero')
-          : () => notify({message: 'No data available'})
-      }>
+    <Fragment>
       <Image
+        resizeMode="contain"
         source={{uri: data.image}}
-        style={{height: 75, width: 75, borderWidth: 1, borderColor: 'black'}}
+        style={style.images.resultsPreview}
       />
       <View style={style.containers.previewDetailHold}>
-        <View
-          style={{
-            height: '100%',
-            width: `${data.win_rate}%`,
-            backgroundColor: 'red',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-          }}
+        <View style={style.containers.previewTextHold}>
+          <Text style={style.typography.resultsPreviewText} t>
+            {data.name}
+          </Text>
+          {data.games_played && (
+            <Text style={style.typography.resultsPreviewText}>
+              ({data.win_count} - {data.games_played - data.win_count})
+            </Text>
+          )}
+        </View>
+        <Progress.Bar
+          width={null}
+          progress={+data.win_rate / 100}
+          unfilledColor="rgba(255,255, 255, 0.7)"
         />
-        <Text style={style.typography.mainText}>{data.name}</Text>
-        <Text style={style.typography.subHead}>
-          Record: {data.win_count} - {data.games_played - data.win_count} ||{' '}
-          {data.win_rate}%
-        </Text>
       </View>
-    </TouchableOpacity>
+    </Fragment>
+  );
+};
+
+const ResultPreview = props => {
+  return (
+    <UI.Expandable
+      {...props}
+      closedHeight={50}
+      openHeight={150}
+      style={style.containers.resultsPreviewHold}
+      renderClosed={renderClosed}
+      disabled={!props.data.games_played}
+    />
   );
 };
 

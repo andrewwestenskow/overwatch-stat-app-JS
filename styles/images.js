@@ -8,4 +8,9 @@ export default StyleSheet.create({
     height: windowWidth / 4,
     margin: 5,
   },
+  resultsPreview: {
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+  },
 });

@@ -2,6 +2,9 @@ import {StyleSheet, Dimensions} from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
+const roboto = 'Roboto';
+const openSans = 'OpenSans';
+
 const base = {
   fontFamily: 'Koverwatch',
 };
@@ -47,5 +50,10 @@ export default StyleSheet.create({
     fontSize: 48,
     width: '100%',
     textAlign: 'center',
+  },
+  resultsPreviewText: {
+    color: '#fff',
+    fontFamily: openSans,
+    fontSize: 16,
   },
 });

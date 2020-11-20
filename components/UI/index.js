@@ -6,6 +6,7 @@ import SectionSwipe from './SectionSwipe';
 import Progress from './Progress';
 import Heading from './Heading';
 import CenterButton from './CenterButton';
+import Expandable from './Expandable';
 export default {
   Button,
   Input,
@@ -16,4 +17,5 @@ export default {
   Progress,
   Heading,
   CenterButton,
+  Expandable,
 };
