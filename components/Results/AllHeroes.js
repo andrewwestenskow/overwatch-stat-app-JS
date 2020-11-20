@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {PlayersContext} from '../../context/stores/players';
-import {ScrollView, Text} from 'react-native';
+import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import SafeView from '../../hocs/SafeView';
 import styles from '../../styles';
 import httpRequest from '../../utils/httpRequest';
@@ -19,21 +19,18 @@ const AllHeroes = props => {
     );
   }, [player.id]);
   return (
-    <ScrollView
-      contentContainerStyle={{
-        ...styles.containers.container,
-        padding: 5,
-      }}>
-      <Text style={styles.typography.heading}>All Heroes</Text>
-      {results.map(hero => (
-        <ResultPreview
-          key={hero.id}
-          data={hero}
-          navigation={props.navigation}
-        />
-      ))}
-    </ScrollView>
+    <View style={styles.containers.listContainerBg}>
+      <FlatList
+        ListEmptyComponent={<ActivityIndicator color="#fff" />}
+        ListHeaderComponent={
+          <Text style={styles.typography.heading}>All Heroes</Text>
+        }
+        data={results}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({item}) => <ResultPreview data={item} />}
+      />
+    </View>
   );
 };
 
-export default SafeView(AllHeroes);
+export default AllHeroes;

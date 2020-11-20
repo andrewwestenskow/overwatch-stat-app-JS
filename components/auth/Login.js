@@ -51,10 +51,16 @@ const Login = ({navigation}) => {
         <>
           <Text style={typography.heading}>Login</Text>
           <UI.Input
+            textContentType="emailAddress"
+            autoFocus={true}
+            autoCapitalize="none"
+            autoCompleteType="email"
             onChangeText={value => setEmail(value)}
             placeholder="Email"
           />
           <UI.Input
+            secureTextEntry={true}
+            textContentType="password"
             onChangeText={value => setPassword(value)}
             placeholder="Password"
           />

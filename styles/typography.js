@@ -55,5 +55,6 @@ export default StyleSheet.create({
     color: '#fff',
     fontFamily: openSans,
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });

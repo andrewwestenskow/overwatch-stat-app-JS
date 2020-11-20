@@ -3,6 +3,8 @@ import {StyleSheet, Dimensions} from 'react-native';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
+const primaryBg = '#2d3356';
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -10,13 +12,13 @@ export default StyleSheet.create({
     paddingBottom: 175,
     minHeight: windowHeight,
     width: windowWidth,
-    backgroundColor: '#2d3356',
+    backgroundColor: primaryBg,
   },
   window: {
     flex: 1,
     minHeight: windowHeight,
     width: windowWidth,
-    backgroundColor: '#2d3356',
+    backgroundColor: primaryBg,
   },
   flex: {
     flexDirection: 'row',
@@ -29,6 +31,10 @@ export default StyleSheet.create({
   },
   listContainer: {
     width: '100%',
+  },
+  listContainerBg: {
+    flex: 1,
+    backgroundColor: primaryBg,
   },
   fixedFooter: {
     display: 'flex',
@@ -55,7 +61,7 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     paddingTop: 5,
     paddingLeft: 10,
-    paddingRight: 10,
+    paddingRight: 25,
     justifyContent: 'space-between',
   },
   previewDetailHold: {
