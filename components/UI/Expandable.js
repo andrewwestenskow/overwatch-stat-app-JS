@@ -38,6 +38,7 @@ export default props => {
 
   return (
     <Expandable
+      activeOpacity={0.8}
       style={{...style, height: heightChange}}
       onPress={() => (disabled ? null : setIsOpen(!isOpen))}>
       {renderClosed({...props, setIsOpen, isOpen})}
