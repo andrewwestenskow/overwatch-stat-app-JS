@@ -12,7 +12,7 @@ export default props => {
     style,
     disabled,
   } = props;
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const heightChange = useRef(new Animated.Value(closedHeight)).current;
 
@@ -33,7 +33,7 @@ export default props => {
   };
 
   useEffect(() => {
-    isOpen ? close() : open();
+    !isOpen ? close() : open();
   }, [isOpen]);
 
   return (
@@ -42,7 +42,7 @@ export default props => {
       style={{...style, height: heightChange}}
       onPress={() => (disabled ? null : setIsOpen(!isOpen))}>
       {renderClosed({...props, setIsOpen, isOpen})}
-      {/* {isOpen && renderOpen({isOpen, setIsOpen})} */}
+      {isOpen ? renderOpen({...props, isOpen, setIsOpen}) : null}
     </Expandable>
   );
 };
