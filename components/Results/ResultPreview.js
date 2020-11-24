@@ -2,7 +2,6 @@ import React, {useEffect, useContext, useState} from 'react';
 import {PlayersContext} from '../../context/stores/players';
 import {View, Text, Image} from 'react-native';
 import * as Progress from 'react-native-progress';
-import notify from '../../utils/notify';
 import style from '../../styles';
 import UI from '../UI';
 import httpRequest from '../../utils/httpRequest';
@@ -44,21 +43,49 @@ const RenderOpen = props => {
   const [bestAndWorst, setBestAndWorst] = useState({best: {}, worst: {}});
 
   useEffect(() => {
-    httpRequest({url: `/history/${player.id}/heroes/${props.data.id}`}).then(
-      data => {
-        setBestAndWorst(data);
-        setIsLoading(false);
-      },
-    );
+    httpRequest({
+      url: `/history/${player.id}/heroes/${props.data.id}?preview=true`,
+    }).then(data => {
+      setBestAndWorst(data);
+      setIsLoading(false);
+    });
   }, [player.id, props.data.id]);
   return (
-    <View style={{height: props.openHeight - props.closedHeight}}>
+    <View
+      style={{
+        height: props.openHeight - props.closedHeight,
+      }}>
       {isLoading ? (
         <Text>Loading...</Text>
       ) : (
         <View>
-          <Text>Best: {bestAndWorst.best.name}</Text>
-          <Text>Worst: {bestAndWorst.worst.name}</Text>
+          <View style={style.containers.lineItem}>
+            <View style={style.containers.lineItemHalf}>
+              <Image
+                style={style.images.smallImage}
+                source={{uri: bestAndWorst.best.image}}
+              />
+              <Text style={style.typography.good}>
+                {bestAndWorst.best.name} ({bestAndWorst.best.win_count} -{' '}
+                {bestAndWorst.best.games_played - bestAndWorst.best.win_count})
+              </Text>
+            </View>
+            <View style={style.containers.lineItemHalf}>
+              <Image
+                style={style.images.smallImage}
+                source={{uri: bestAndWorst.worst.image}}
+              />
+              <Text style={style.typography.bad}>
+                {bestAndWorst.worst.name} ({bestAndWorst.worst.win_count} -{' '}
+                {bestAndWorst.worst.games_played - bestAndWorst.worst.win_count}
+                )
+              </Text>
+            </View>
+          </View>
+          <UI.CenterButton
+            onPress={() => props.navigation.navigate('Individual Hero')}
+            title="See details"
+          />
         </View>
       )}
     </View>

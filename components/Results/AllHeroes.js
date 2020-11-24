@@ -27,7 +27,9 @@ const AllHeroes = props => {
         }
         data={results}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => <ResultPreview data={item} />}
+        renderItem={({item}) => (
+          <ResultPreview navigation={{...props.navigation}} data={item} />
+        )}
       />
     </View>
   );

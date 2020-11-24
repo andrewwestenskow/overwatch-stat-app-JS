@@ -13,4 +13,8 @@ export default StyleSheet.create({
     width: 40,
     borderRadius: 50,
   },
+  smallImage: {
+    width: 25,
+    height: 25,
+  },
 });

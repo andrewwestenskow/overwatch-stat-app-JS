@@ -6,7 +6,7 @@ const roboto = 'Roboto';
 const openSans = 'OpenSans';
 
 const base = {
-  fontFamily: 'Koverwatch',
+  fontFamily: roboto,
 };
 
 export default StyleSheet.create({
@@ -56,5 +56,15 @@ export default StyleSheet.create({
     fontFamily: openSans,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  good: {
+    ...base,
+    color: '#ffb642',
+    paddingLeft: 5,
+  },
+  bad: {
+    ...base,
+    color: '#fe0230',
+    paddingLeft: 5,
   },
 });

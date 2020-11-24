@@ -5,7 +5,7 @@ const windowWidth = Dimensions.get('window').width;
 
 const primaryBg = '#2d3356';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -22,6 +22,19 @@ export default StyleSheet.create({
   },
   flex: {
     flexDirection: 'row',
+    alignItems: 'center',
+  },
+  lineItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-evenly',
+    padding: 5,
+  },
+  lineItemHalf: {
+    width: '50%',
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   listItem: {
@@ -77,3 +90,5 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+export default styles;
